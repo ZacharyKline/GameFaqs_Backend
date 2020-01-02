@@ -55,6 +55,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+AUTH_USER_MODEL = 'GameFaqs_Backend.user'
+
+
 ROOT_URLCONF = 'GameFaqs_Backend.urls'
 
 TEMPLATES = [
