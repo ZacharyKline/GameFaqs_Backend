@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class Game(models.Model):
@@ -27,7 +27,7 @@ class Platform(models.Model):
 
 
 class Faq(models.Model):
-    user = models.ForeignKey(
+    user = models.ForeignKey(get_user_model(),
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
@@ -38,7 +38,7 @@ class Faq(models.Model):
 
 
 class Message(models.Model):
-    user = models.ForeignKey(
+    user = models.ForeignKey(get_user_model(),
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
