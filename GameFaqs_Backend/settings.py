@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-AUTH_USER_MODEL = 'GameFaqs_Backend.user'
+AUTH_USER_MODEL = 'GameFaqs_Backend.GFUser'
 
 
 ROOT_URLCONF = 'GameFaqs_Backend.urls'
