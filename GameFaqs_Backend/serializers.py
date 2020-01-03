@@ -6,7 +6,7 @@ class UserSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.GFUser
         fields = [
-            'id'
+            'id',
             'username',
             'email',
             'signature',
@@ -18,13 +18,13 @@ class GameSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Game
         fields = [
-            'id'
+            'id',
             'platform',
             'name',
             'esrb',
             'community_rating',
-            'user_rating'
-            # 'faqs'
+            'user_rating',
+            'release_date'
         ]
 
 
@@ -32,7 +32,7 @@ class PlatformSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Platform
         fields = [
-            'id'
+            'id',
             'consoles'
         ]
 
@@ -41,7 +41,7 @@ class FaqSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Faq
         fields = [
-            'id'
+            'id',
             'user',
             'game',
             'name',
@@ -59,5 +59,6 @@ class MessageSerializer(HyperlinkedModelSerializer):
             'title',
             'body',
             'datetime',
-            'like'
+            'like',
+            'game'
         ]
