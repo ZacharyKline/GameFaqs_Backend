@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+# from GameFaqs_Backend import user
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'GameFaqs_Backend',
     'rest_framework',
     'corsheaders',
+    # 'GameFaqs_Backend.user'
 
 
 ]
@@ -55,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-AUTH_USER_MODEL = 'GameFaqs_Backend.user'
+AUTH_USER_MODEL = 'GameFaqs_Backend.GFUser'
 
 
 ROOT_URLCONF = 'GameFaqs_Backend.urls'
@@ -131,3 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
