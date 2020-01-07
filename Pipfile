@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==3.0"
 djangorestframework = "*"
 django-cors-headers = "*"
+django-rest-knox = "*"
 
 [requires]
 python_version = "3.8"

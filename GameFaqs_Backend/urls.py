@@ -30,4 +30,12 @@ router.register(r'message', views.MessageViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^api/auth/', include('knox.urls')),
+    url("^auth/register/$", views.RegistrationViewSet.as_view()),
+    url("^auth/login/$", views.LoginViewSet.as_view()),
+    url("^auth/user/$", views.UserViewSet.as_view({'get': 'id'})),
+
+
+
+
 ]

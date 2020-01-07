@@ -1,7 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from GameFaqs_Backend import models, serializers
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from knox.models import AuthToken
+
+# from django.views.generic.edit import CreateView
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -41,3 +44,34 @@ class MessageViewSet(viewsets.ModelViewSet):
         likes.like -= 1
         likes.save()
         return Response({'status': 'unliked!'})
+
+
+class LoginViewSet(generics.GenericAPIView):
+    serializer_class = serializers.LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validate_data
+        return Response({
+            'user': serializers.UserSerializer(
+                user,
+                context=self.get_serializer_context()
+            ).data,
+            'token': AuthToken.objects.create(user)
+        })
+
+
+class RegistrationViewSet(generics.GenericAPIView):
+    serializer_class = serializers.CreateGFUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "user": serializers.UserSerializer(
+                user,
+                context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)
+        })

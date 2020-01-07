@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'GameFaqs_Backend',
     'rest_framework',
     'corsheaders',
-    # 'GameFaqs_Backend.user'
+    'knox',
 
 
 ]
@@ -136,5 +136,7 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+
 }

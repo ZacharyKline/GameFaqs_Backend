@@ -1,8 +1,9 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework import serializers
 from GameFaqs_Backend import models
+from django.contrib.auth import authenticate
 
 
-class UserSerializer(HyperlinkedModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.GFUser
         fields = [
@@ -14,7 +15,38 @@ class UserSerializer(HyperlinkedModelSerializer):
         ]
 
 
-class GameSerializer(HyperlinkedModelSerializer):
+class CreateGFUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GFUser
+        fields = ['id', 'username', 'password',
+                  'signature', 'email', 'website']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = models.GFUser.objects.create_user(
+            validated_data['username'],
+            None,
+            validated_data['password'],
+            validated_data['signature'],
+            validated_data['email'],
+            validated_data['website']
+        )
+        return user
+
+
+class LoginUserSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError(
+            "Unable to log in with provided credentials.")
+
+
+class GameSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Game
         fields = [
@@ -28,7 +60,7 @@ class GameSerializer(HyperlinkedModelSerializer):
         ]
 
 
-class PlatformSerializer(HyperlinkedModelSerializer):
+class PlatformSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Platform
         fields = [
@@ -37,7 +69,7 @@ class PlatformSerializer(HyperlinkedModelSerializer):
         ]
 
 
-class FaqSerializer(HyperlinkedModelSerializer):
+class FaqSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Faq
         fields = [
@@ -45,12 +77,11 @@ class FaqSerializer(HyperlinkedModelSerializer):
             'user',
             'game',
             'name',
-            'body',
-
+            'body'
         ]
 
 
-class MessageSerializer(HyperlinkedModelSerializer):
+class MessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Message
         fields = [
