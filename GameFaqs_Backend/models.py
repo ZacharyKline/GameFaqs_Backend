@@ -12,9 +12,8 @@ from django.contrib.auth import get_user_model
 
 class GFUser(AbstractUser):
     # username = models.CharField(max_length=80, unique=True)
-    signature = models.CharField(max_length=200)
-    website = models.URLField(max_length=200)
-    # USERNAME_FIELD = 'username'
+    signature = models.CharField(max_length=200, null=True, blank=True)
+    website = models.URLField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return f'{self.username}'
