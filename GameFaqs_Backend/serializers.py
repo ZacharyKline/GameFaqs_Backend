@@ -24,13 +24,13 @@ class CreateGFUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = models.GFUser.objects.create_user(
-            validated_data['username'],
-            None,
-            validated_data['password'],
-            validated_data['signature'],
-            validated_data['email'],
-            validated_data['website']
+            username=validated_data['username'],
+            password=validated_data['password'],
+            email=validated_data['email']
         )
+        user.signature = validated_data['signature']
+        user.website = validated_data['website']
+        user.save()
         return user
 
 
