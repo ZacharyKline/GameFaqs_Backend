@@ -1,24 +1,33 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from GameFaqs_Backend import models
+from GameFaqs_Backend import forms
+from django.views import View
 
 
-def login_view(request):
-    
-    html = 'generic_form.htm'
-    page = 'login'
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(
-                username=data['username'],
-                password=data['password']
-            )
-        if user:
-            login(request, user)
-            return HttpResponseRedirect(
-                request.GET.get('next', reverse('home'))
-            )
+class ViewMainPage(View):
+    def get(self, request):
+        html = 'index.html'
+        games = models.Game.objects.all()
+        consoles = models.Platform.objects.all()
+        return render(request, html, {'games': games, 'consoles': consoles})
 
-    form = LoginForm()
-   
+
+class ViewGame(View):
+    def get(self, request, id):
+        html = 'game.html'
+        data = models.Game.objects.filter(id=id)
+        return render(request, html, {'data': data})
+
+
+class ViewConsole(View):
+    def get(self, request, id):
+        html = 'consoles.html'
+        data = models.Platform.objects.filter(id=id)
+        return render(request, html, {'data': data})
+
+
+class ViewFaqs(View):
+    def get(self, request, id):
+        html = 'faqs.html'
+        data = models.Faq.objects.filter(id=id)
+        return render(request, html, {'data': data})
