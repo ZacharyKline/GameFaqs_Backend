@@ -14,7 +14,7 @@ class ViewMainPage(View):
 
 class ViewGame(View):
     def get(self, request, id):
-        html = 'game.html'
+        html = 'games.html'
         data = models.Game.objects.filter(id=id)
         return render(request, html, {'data': data})
 
