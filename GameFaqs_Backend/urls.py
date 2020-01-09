@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', views.ViewMainPage.as_view(), name='home'),
     path('game/<int:id>', views.ViewGame.as_view(), name='gameview'),
-    path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview')
+    path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview'),
+    path('faq/<int:id>', views.ViewFaqs.as_view(), name='faqview')
 ]
 
 if settings.DEBUG:

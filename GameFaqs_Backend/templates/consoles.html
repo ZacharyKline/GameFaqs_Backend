@@ -2,7 +2,13 @@
 <br>
 <br>
 <div>
-    {% for con in data%}
-    {{con.consoles}}
-    {% endfor %}
+    <h1>{{console.consoles}}</h1>
+    <div>
+        <p>Games:</p>
+        <ul>
+            {% for item in games %}
+            <a href='/game/{{game.id}}'>{{item.name}}</a>
+            {% endfor %}
+        </ul>
+    </div>
 </div>

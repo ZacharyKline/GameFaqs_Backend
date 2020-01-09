@@ -18,22 +18,25 @@ class ViewMainPage(View):
 class ViewGame(View):
     def get(self, request, id):
         html = 'games.html'
-        data = models.Game.objects.filter(id=id)
-        return render(request, html, {'data': data})
+        games = models.Game.objects.get(id=id)
+        faqs = models.Faq.objects.filter(game=games)
+        return render(request, html, {'games': games, 'faqs': faqs})
 
 
 class ViewConsole(View):
     def get(self, request, id):
         html = 'consoles.html'
-        data = models.Platform.objects.filter(id=id)
-        return render(request, html, {'data': data})
+        console = models.Platform.objects.get(id=id)
+        games = models.Game.objects.filter(platform=console)
+        return render(request, html, {'console': console, 'games': games})
 
 
 class ViewFaqs(View):
-    def get(self, request, game):
+    def get(self, request, id):
         html = 'faqs.html'
-        data = models.Faq.objects.filter(game=game)
-        return render(request, html, {'data': data})
+        game = models.Game.objects.get(id=id)
+        faqs = models.Faq.objects.filter(game=game)
+        return render(request, html, {'game': game, 'faqs': faqs})
 
 
 def login_view(request):
