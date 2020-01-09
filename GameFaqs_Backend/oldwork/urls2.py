@@ -16,15 +16,25 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
+from django.conf.urls import include, url
+from GameFaqs_Backend import views
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register(r'user', views.UserViewSet)
+router.register(r'game', views.GameViewSet)
+router.register(r'platform', views.PlatformViewSet)
+router.register(r'faq', views.FaqViewSet)
+router.register(r'message', views.MessageViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
+    url(r'^api/auth/', include('knox.urls')),
+    url("^auth/register/$", views.RegistrationViewSet.as_view()),
+    url("^auth/login/$", views.LoginViewSet.as_view()),
+
+
+
+
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
