@@ -1,1 +1,18 @@
-<h1>Hello</h1>
+<a href='/'><button>Home</button></a>
+<br>
+<br>
+<div>
+    <div>
+        {% for game in data%}
+        <div>{{game.name}}</div>
+        <div>{{game.console_name}}</div>
+        <div>{{game.esrb}}</div>
+        <div>{{game.release_date}}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <ul>
+            Faqs:
+        </ul>
+    </div>
+</div>

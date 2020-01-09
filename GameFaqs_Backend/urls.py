@@ -21,12 +21,14 @@ from django.conf.urls.static import static
 from GameFaqs_Backend import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.ViewMainPage.as_view(), name='Mainsite'),
-    path('game/<int:id>', views.ViewGame.as_view(), name='gameview')
-
+    path('login/', views.login_view, name="login_view"),
+    path('logout/', views.logoutview, name='logoutview'),
+    path('register/', views.register_user_view, name="registerview"),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', views.ViewMainPage.as_view(), name='home'),
+    path('game/<int:id>', views.ViewGame.as_view(), name='gameview'),
+    path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview')
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

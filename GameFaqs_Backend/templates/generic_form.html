@@ -1,0 +1,15 @@
+
+{% if page == 'register' %}
+<a href="login/">LOGIN INTO EXISTING ACCOUNT</a>
+<h1>Create Account</h1>
+{% elif page == 'login' %}
+<a href="/">DON'T HAVE AN ACCOUNT?</a>
+<h1>Login Page</h1>
+{% else %}
+<h1>New Tweet Page</h1>
+{% endif %}
+
+<form action="" method="post">
+{% csrf_token %} {{ form.as_p }}
+<input type="submit" value="Submit" />
+</form>
