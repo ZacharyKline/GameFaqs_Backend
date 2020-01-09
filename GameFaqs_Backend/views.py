@@ -1,7 +1,10 @@
+from GameFaqs_Backend.forms import LoginForm, RegisterForm
+from GameFaqs_Backend.models import GFUser
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
+from django.contrib.auth import login, logout, authenticate
 
 
 class ViewMainPage(View):
@@ -14,31 +17,33 @@ class ViewMainPage(View):
 
 class ViewGame(View):
     def get(self, request, id):
-        html = 'game.html'
-        data = models.Game.objects.filter(id=id)
-        return render(request, html, {'data': data})
+        html = 'games.html'
+        games = models.Game.objects.get(id=id)
+        faqs = models.Faq.objects.filter(game=games)
+        return render(request, html, {'games': games, 'faqs': faqs})
 
 
 class ViewConsole(View):
     def get(self, request, id):
         html = 'consoles.html'
-        data = models.Platform.objects.filter(id=id)
-        return render(request, html, {'data': data})
+        console = models.Platform.objects.get(id=id)
+        games = models.Game.objects.filter(platform=console)
+        return render(request, html, {'console': console, 'games': games})
 
 
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
-        data = models.Faq.objects.filter(id=id)
-        return render(request, html, {'data': data})
-from GameFaqs_Backend.forms import LoginForm, RegisterForm
-from GameFaqs_Backend.models import GFUser
+        game = models.Game.objects.get(id=id)
+        faqs = models.Faq.objects.filter(game=game)
+        return render(request, html, {'game': game, 'faqs': faqs})
+
 
 def login_view(request):
     html = 'generic_form.html'
     page = 'login'
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = forms.LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user = authenticate(
@@ -53,33 +58,29 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
-   
+
 
 def register_user_view(request):
     html = 'generic_form.html'
     page = 'register'
     if request.method == "POST":
 
-        form = RegisterForm(request.POST)
-
-        # already_a_user = User.objects.filter(username=current_user)
-
-        # if already_a_user.exists():
-        #     raise form.ValidationError("That user is already taken")
+        form = forms.RegisterForm(request.POST)
 
         if form.is_valid():
 
             data = form.cleaned_data
 
-            u = User.objects.create_user(
+            u = GFUser.objects.create_user(
                 username=data['username'],
                 password=data['password'])
-
-            GFUser.objects.create(user=u)
 
             login(request, u)
             return HttpResponseRedirect(reverse('home'))
     form = RegisterForm()
-
     return render(request, html, {'form': form, 'page': page})
 
+
+def logoutview(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('login_view'))

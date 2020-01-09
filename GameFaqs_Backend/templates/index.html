@@ -1,0 +1,11 @@
+{% load static %}
+<link rel='stylesheet' href='static/styles.css'>
+<div class='bodycontent'>
+    {% for game in games%}
+    <div><a href='/game/{{game.id}}'>{{ game.name }}</a></div>
+    {% endfor %}
+    <br>
+    {% for plat in consoles%}
+    <div><a href='/platform/{{plat.id}}'>{{ plat.consoles }}</a></div>
+    {% endfor %}
+</div>

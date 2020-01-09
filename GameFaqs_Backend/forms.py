@@ -1,22 +1,29 @@
 from django import forms
-from GameFaqs_Backend.models import GFUser
+from django.forms import ModelForm
+from GameFaqs_Backend import models
 
-# Login form
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=25)
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-# Register Form/Create User
-class RegisterForm(forms.ModelForm):
-    username = forms.CharField(max_length=50, required=True)
-    password = forms.CharField(widget=forms.PasswordInput, required=True)
-
+class RegisterForm(ModelForm):
     class Meta:
-        model = GFUser
+        model = models.GFUser
         fields = ['username', 'password']
-
-
+# Register Form/Create Us
 # Create FAQ
 
+
+class Add_FAQ(ModelForm):
+    class Meta:
+        model = models.Faq
+        fields = ['name', 'body']
 # Create message (for message board)
+
+
+class Add_Message(ModelForm):
+    class Meta:
+        model = models.Message
+        fields = ['title', 'body']
