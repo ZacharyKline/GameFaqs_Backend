@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from GameFaqs_Backend.views import login_view, register_user_view
 
 
 urlpatterns = [
+    path('login/', login_view, name="loginview"),
+    path('register/', register_user_view, name="registerview"),
     path('admin/', admin.site.urls),
 ]
 
