@@ -56,7 +56,8 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
             'esrb',
             'community_rating',
             'user_rating',
-            'release_date'
+            'release_date',
+            'console_name'
         ]
 
 
@@ -77,7 +78,9 @@ class FaqSerializer(serializers.HyperlinkedModelSerializer):
             'user',
             'game',
             'name',
-            'body'
+            'body',
+            'game_name',
+            'user_name'
         ]
 
 

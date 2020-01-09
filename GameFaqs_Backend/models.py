@@ -37,6 +37,10 @@ class Game(models.Model):
     def __str__(self):
         return f'{self.name} - {self.release_date}'
 
+    @property
+    def console_name(self):
+        return self.platform.consoles
+
 
 class Platform(models.Model):
     consoles = models.CharField(max_length=50)
@@ -57,6 +61,14 @@ class Faq(models.Model):
 
     def __str__(self):
         return f'{self.game} - {self.name}'
+
+    @property
+    def game_name(self):
+        return self.game.name
+
+    @property
+    def user_name(self):
+        return self.user.username
 
 
 class Message(models.Model):
