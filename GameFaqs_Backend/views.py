@@ -72,12 +72,9 @@ def register_user_view(request):
                 username=data['username'],
                 password=data['password'])
 
-            GFUser.objects.create(user=u)
-
             login(request, u)
             return HttpResponseRedirect(reverse('home'))
     form = RegisterForm()
-
     return render(request, html, {'form': form, 'page': page})
 
 
