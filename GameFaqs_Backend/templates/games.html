@@ -10,6 +10,7 @@
     </div>
     <div>
         <ul>
+            <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a><a href="/addfaq/{{ games.id }}"><button>Add Message</button></a>
             Faqs:
             {% for item in faqs %}
             <p>{{item.name}} by {{item.user}}</p>

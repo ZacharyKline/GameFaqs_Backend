@@ -26,11 +26,11 @@ urlpatterns = [
     path('register/', views.register_user_view, name="registerview"),
     path('admin/', admin.site.urls, name='admin'),
     path('', views.ViewMainPage.as_view(), name='home'),
-    path('game/<int:id>', views.ViewGame.as_view(), name='gameview'),
-    path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview'),
-    path('faq/<int:id>', views.ViewFaqs.as_view(), name='faqview'),
-    path('addfaq/', views.AddFaqView.as_view()),
-    path('addmessage', views.AddMessageView.as_view())
+    path('game/<int:id>/', views.ViewGame.as_view(), name='gameview'),
+    path('platform/<int:id>/', views.ViewConsole.as_view(), name='consoleview'),
+    path('faq/<int:id>/', views.ViewFaqs.as_view(), name='faqview'),
+    path('addfaq/<int:id>/', views.AddFaqView.as_view()),
+    path('addmessage/<int:id>', views.AddMessageView.as_view())
 ]
 
 if settings.DEBUG:

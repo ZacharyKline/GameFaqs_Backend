@@ -6,11 +6,8 @@ from django.contrib.auth.decorators import login_required
 from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
-<<<<<<< HEAD
-=======
 from django.contrib.auth import login, logout, authenticate
 
->>>>>>> 763e8d0669a705e00793ba6705565087d4a0499d
 
 class ViewMainPage(View):
     def get(self, request):
@@ -35,34 +32,49 @@ class ViewConsole(View):
         games = models.Game.objects.filter(platform=console)
         return render(request, html, {'console': console, 'games': games})
 
+# class ViewMessage(View):
+#     def get(self, request, id):
+#         html = "message.html"
+#         user =  models.
+#         game =  
+#         name =  
+#         body = 
+
+
+
 
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
-<<<<<<< HEAD
         data = models.Faq.objects.filter(id=id)
         return render(request, html, {'data': data})
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
     form = forms.Add_FAQ
-    def post(self, request):
+    def post(self, request, id):
+        # game_name = models.Game.objects.get(game=game)
         if request.method =="POST":
-            form = Add_FAQ(request.POST)
+            form = forms.Add_FAQ(request.POST)
             if form.is_valid():
                 data= form.cleaned_data
-            Faq.objects.create(
+            # breakpoint()
+            models.Faq.objects.create(
                 user=request.user,
                 name=data['name'],
                 body=data['body'],
-                game=models.Game.filter(id = id)
+                game=data['game']
             )
-            return redirect('/')
-        else:
-            return HttpResponseRedirect(reverse('/'))
+            
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
+            # else:
+                
 
-    def get(self, request):
-        form = Add_Faq()
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game':instance, 'name':'' ,'body':''}
+        form = forms.Add_FAQ(initial=data)
+        
         return render(request, self.html, {'form':form}) 
 
     
@@ -80,18 +92,16 @@ class AddMessageView(View):
                 user=request.user,
                 title=data['title'],
                 body=data['body'],
-                game=models.Game.filter(id=id)
+                game=data['game']
             )
-            return redirect('/')
-        else:
-            return HttpResponseRedirect(reverse('/'))
-    def get(self, request):
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
+        # else:
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game':instance, 'name':'' ,'body':''}
         form = forms.Add_Message()
         return render(request, self.html, {'form':form})
-=======
-        game = models.Game.objects.get(id=id)
-        faqs = models.Faq.objects.filter(game=game)
-        return render(request, html, {'game': game, 'faqs': faqs})
+
 
 
 def login_view(request):
@@ -139,4 +149,3 @@ def register_user_view(request):
 def logoutview(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_view'))
->>>>>>> 763e8d0669a705e00793ba6705565087d4a0499d
