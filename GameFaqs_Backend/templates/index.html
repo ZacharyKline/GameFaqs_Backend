@@ -1,6 +1,8 @@
 {% load static %}
 <link rel='stylesheet' href='static/styles.css'>
 <div class='bodycontent'>
+<h1> cat</h1>
+
     {% for game in games%}
     <div><a href='/game/{{game.id}}'>{{ game.name }}</a></div>
     {% endfor %}

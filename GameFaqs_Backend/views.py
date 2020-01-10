@@ -1,6 +1,8 @@
 from GameFaqs_Backend.forms import LoginForm, RegisterForm
 from GameFaqs_Backend.models import GFUser
 from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
@@ -20,7 +22,8 @@ class ViewGame(View):
         html = 'games.html'
         games = models.Game.objects.get(id=id)
         faqs = models.Faq.objects.filter(game=games)
-        return render(request, html, {'games': games, 'faqs': faqs})
+        messages = models.Message.objects.filter(game=games)
+        return render(request, html, {'games': games, 'faqs': faqs, 'messages':messages})
 
 
 class ViewConsole(View):
@@ -30,13 +33,74 @@ class ViewConsole(View):
         games = models.Game.objects.filter(platform=console)
         return render(request, html, {'console': console, 'games': games})
 
+# class ViewMessage(View):
+#     def get(self, request, id):
+#         html = "message.html"
+#         user =  models.
+#         game =  
+#         name =  
+#         body = 
+
+
+
 
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
-        game = models.Game.objects.get(id=id)
-        faqs = models.Faq.objects.filter(game=game)
-        return render(request, html, {'game': game, 'faqs': faqs})
+        data = models.Faq.objects.filter(id=id)
+        return render(request, html, {'data': data})
+@method_decorator(login_required, name='dispatch')
+class AddFaqView(View):
+    html = "addfaq.html"
+    form = forms.Add_FAQ
+    def post(self, request, id):
+        # game_name = models.Game.objects.get(game=game)
+        if request.method =="POST":
+            form = forms.Add_FAQ(request.POST)
+            if form.is_valid():
+                data= form.cleaned_data
+            # breakpoint()
+            models.Faq.objects.create(
+                user=request.user,
+                name=data['name'],
+                body=data['body'],
+                game=data['game']
+            )
+            
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
+
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game':instance, 'name':'' ,'body':''}
+        form = forms.Add_FAQ(initial=data)
+        
+        return render(request, self.html, {'form':form}) 
+
+    
+@method_decorator(login_required, name='dispatch')
+class AddMessageView(View):
+    html = "addmessage.html"
+    form = forms.Add_Message
+    def post(self, request, id):
+        if request.method == "POST":
+            form = forms.Add_Message(request.POST)
+
+            if form.is_valid():
+                data= form.cleaned_data
+            models.Message.objects.create(
+                user=request.user,
+                title=data['title'],
+                body=data['body'],
+                game=data['game']
+            )
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
+        # else:
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game':instance, 'title':'' ,'body':''}
+        form = forms.Add_Message(initial=data)
+        return render(request, self.html, {'form':form})
+
 
 
 def login_view(request):
@@ -58,6 +122,9 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
+
+# def messagedetailview(request):
+#     html = "messagedetail.html"
 
 
 def register_user_view(request):
