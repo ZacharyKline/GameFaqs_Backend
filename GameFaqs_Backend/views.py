@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
-from
-
 
 class ViewMainPage(View):
     def get(self, request):
@@ -32,45 +32,49 @@ class ViewFaqs(View):
         html = 'faqs.html'
         data = models.Faq.objects.filter(id=id)
         return render(request, html, {'data': data})
-@login_required
-class AddFaqView(request, id):
-    form = None
+@method_decorator(login_required, name='dispatch')
+class AddFaqView(View):
     html = "addfaq.html"
-    if request.method =="POST":
-        form = Add_FAQ(request.POST)
-
-        if form.is_valid()
-            data= form.cleaned_data
+    form = forms.Add_FAQ
+    def post(self, request):
+        if request.method =="POST":
+            form = Add_FAQ(request.POST)
+            if form.is_valid():
+                data= form.cleaned_data
             Faq.objects.create(
-            user=request.user,
-            name=data['name'],
-            body=data['body'],
-            game=game.objects.get.filter.(id=id).first()
+                user=request.user,
+                name=data['name'],
+                body=data['body'],
+                game=models.Game.filter(id = id)
             )
-        return redirect('/')
+            return redirect('/')
         else:
             return HttpResponseRedirect(reverse('/'))
-    else:
-        form = Add_FAQ()
-    return render(request, html,{'form':form})
 
-class AddMessageView(request, id):
-    form = None
-    html = addmessage.html
-    if request.method == "POST":
-        form = Add_Message(request.POST)
+    def get(self, request):
+        form = Add_Faq()
+        return render(request, self.html, {'form':form}) 
 
-        if form.is_valid()
-        data= form.cleaned_data
-        Message.objects.create(
-        user=request.user,
-        title=data['title'],
-        body=data['body'],
-        game=game.objects.get.filter.(id=id).first()
-        )
-        return redirect('/')
+    
+@method_decorator(login_required, name='dispatch')
+class AddMessageView(View):
+    html = "addmessage.html"
+    form = forms.Add_Message
+    def post(self, request, id):
+        if request.method == "POST":
+            form = forms.Add_Message(request.POST)
+
+            if form.is_valid():
+                data= form.cleaned_data
+            models.Message.objects.create(
+                user=request.user,
+                title=data['title'],
+                body=data['body'],
+                game=models.Game.filter(id=id)
+            )
+            return redirect('/')
         else:
             return HttpResponseRedirect(reverse('/'))
-    else:
-        form = Add_Message()
-    return render(request, html, {'form':form})
+    def get(self, request):
+        form = forms.Add_Message()
+        return render(request, self.html, {'form':form})

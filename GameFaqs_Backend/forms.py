@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from GameFaqs_Backend import models, views 
+from GameFaqs_Backend import models, views
+ 
 
 
 # Login form
@@ -10,10 +11,10 @@ from GameFaqs_Backend import models, views
 # Create FAQ
 class Add_FAQ(ModelForm):
     class Meta:
-        model = Faq
+        model = models.Faq
         fields = ['name', 'body']
 # Create message (for message board)
 class Add_Message(ModelForm):
     class Meta:
-        model = Message
+        model = models.Message
         fields = ['title', 'body']

@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-
+from GameFaqs_Backend.views import AddMessageView, AddFaqView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('addfaq/', AddFaqView.as_view()),
+    path('addmessage', AddMessageView.as_view())
 ]
 
 
