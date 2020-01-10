@@ -22,7 +22,8 @@ class ViewGame(View):
         html = 'games.html'
         games = models.Game.objects.get(id=id)
         faqs = models.Faq.objects.filter(game=games)
-        return render(request, html, {'games': games, 'faqs': faqs})
+        messages = models.Message.objects.filter(game=games)
+        return render(request, html, {'games': games, 'faqs': faqs, 'messages':messages})
 
 
 class ViewConsole(View):
@@ -67,8 +68,6 @@ class AddFaqView(View):
             )
             
             return HttpResponseRedirect(reverse('gameview', args=[id]))
-            # else:
-                
 
     def get(self, request, id):
         instance = models.Game.objects.get(id=id)
@@ -98,8 +97,8 @@ class AddMessageView(View):
         # else:
     def get(self, request, id):
         instance = models.Game.objects.get(id=id)
-        data = {'game':instance, 'name':'' ,'body':''}
-        form = forms.Add_Message()
+        data = {'game':instance, 'title':'' ,'body':''}
+        form = forms.Add_Message(initial=data)
         return render(request, self.html, {'form':form})
 
 
@@ -123,6 +122,9 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
+
+# def messagedetailview(request):
+#     html = "messagedetail.html"
 
 
 def register_user_view(request):

@@ -27,5 +27,5 @@ class Add_FAQ(ModelForm):
 class Add_Message(ModelForm):
     class Meta:
         model = models.Message
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'game']
         

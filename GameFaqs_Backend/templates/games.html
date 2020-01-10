@@ -10,11 +10,17 @@
     </div>
     <div>
         <ul>
-            <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a><a href="/addfaq/{{ games.id }}"><button>Add Message</button></a>
+            <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a><a href="/addmessage/{{ games.id }}"><button>Add Message</button></a>
             Faqs:
             {% for item in faqs %}
             <p>{{item.name}} by {{item.user}}</p>
             {% endfor %}
         </ul>
+        <ul>
+         Messages:
+            {% for item in messages %}
+            <p>{{item.title}} by {{item.user}}</p>
+            {% endfor %}
+        </ul>    
     </div>
 </div>
