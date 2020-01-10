@@ -5,6 +5,8 @@ from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
 from django.contrib.auth import login, logout, authenticate
+from django.views.generic import TemplateView
+import logging
 
 
 class ViewMainPage(View):
@@ -84,3 +86,18 @@ def register_user_view(request):
 def logoutview(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_view'))
+
+
+class UserAccountView(TemplateView):
+    template_name = "user_account.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get(self, request, pk, *args, **kwargs):
+        my_user = models.GFUser.objects.get(pk=pk)
+        user_faqs = models.Faq.objects.filter(user=my_user)
+        
+        return render(request, self.template_name, {"user_faqs": user_faqs} )
+    

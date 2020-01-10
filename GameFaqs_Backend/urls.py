@@ -28,7 +28,8 @@ urlpatterns = [
     path('', views.ViewMainPage.as_view(), name='home'),
     path('game/<int:id>', views.ViewGame.as_view(), name='gameview'),
     path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview'),
-    path('faq/<int:id>', views.ViewFaqs.as_view(), name='faqview')
+    path('faq/<int:id>', views.ViewFaqs.as_view(), name='faqview'),
+    path('useraccount/<int:pk>', views.UserAccountView.as_view(), name='userdetail')
 ]
 
 if settings.DEBUG:
