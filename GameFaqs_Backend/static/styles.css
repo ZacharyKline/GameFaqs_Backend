@@ -8,3 +8,18 @@ body {
     width: 70%;
     padding: 20px;
 }
+
+.navbarStyle {
+    background: #1509f4;
+    height: 10%;
+    margin: auto;
+}
+
+.buttonStyle {
+    font-size: 6vh;
+    border: 3px solid black;
+    background: #a39fe9;
+    font-weight: bolder;
+    color: rgb(48, 48, 48);
+
+}

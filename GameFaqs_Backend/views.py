@@ -22,7 +22,12 @@ class ViewGame(View):
         html = 'games.html'
         games = models.Game.objects.get(id=id)
         faqs = models.Faq.objects.filter(game=games)
-        return render(request, html, {'games': games, 'faqs': faqs})
+        messages = models.Message.objects.filter(game=games)
+        return render(
+            request,
+            html,
+            {'games': games, 'faqs': faqs, 'messages': messages}
+        )
 
 
 class ViewConsole(View):
@@ -66,23 +71,25 @@ class AddFaqView(View):
     html = "addfaq.html"
     form = forms.Add_FAQ
 
-    def post(self, request):
+    def post(self, request, id):
+        # game_name = models.Game.objects.get(game=game)
         if request.method == "POST":
             form = forms.Add_FAQ(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
+            # breakpoint()
             models.Faq.objects.create(
                 user=request.user,
                 name=data['name'],
                 body=data['body'],
-                game=models.Game.filter(id=id)
+                game=data['game']
             )
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponseRedirect(reverse('/'))
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
 
-    def get(self, request):
-        form = forms.Add_Faq()
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game': instance, 'name': '', 'body': ''}
+        form = forms.Add_FAQ(initial=data)
         return render(request, self.html, {'form': form})
 
 
@@ -101,14 +108,15 @@ class AddMessageView(View):
                 user=request.user,
                 title=data['title'],
                 body=data['body'],
-                game=models.Game.filter(id=id)
+                game=data['game']
             )
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponseRedirect(reverse('/'))
+            return HttpResponseRedirect(reverse('gameview', args=[id]))
+        # else:
 
-    def get(self, request):
-        form = forms.Add_Message()
+    def get(self, request, id):
+        instance = models.Game.objects.get(id=id)
+        data = {'game': instance, 'title': '', 'body': ''}
+        form = forms.Add_Message(initial=data)
         return render(request, self.html, {'form': form})
 
 
@@ -131,6 +139,9 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
+
+# def messagedetailview(request):
+#     html = "messagedetail.html"
 
 
 def register_user_view(request):

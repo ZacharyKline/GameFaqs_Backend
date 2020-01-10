@@ -1,0 +1,15 @@
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
+
+<a href='/'><button>Home</button></a>
+<br>
+<br>
+<div>
+    <div>
+
+        {% for item in games %}
+        <div><a href='/game/{{item.id}}'>{{item.name}} </a></div>
+
+        {% endfor %}
+    </div>
+</div>

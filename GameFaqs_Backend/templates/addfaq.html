@@ -1,7 +1,7 @@
 {% load static %}
 <link rel='stylesheet' href='../static/styles.css'>
 
-<form action="/addfaq/" method="post">
+<form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="submit">

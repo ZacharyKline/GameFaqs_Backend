@@ -18,10 +18,11 @@ class RegisterForm(ModelForm):
 class Add_FAQ(ModelForm):
     class Meta:
         model = models.Faq
-        fields = ['name', 'body']
+        fields = ['name', 'body', 'game']
+# Create message (for message board)
 
 
 class Add_Message(ModelForm):
     class Meta:
         model = models.Message
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'game']
