@@ -6,11 +6,8 @@ from django.contrib.auth.decorators import login_required
 from GameFaqs_Backend import models
 from GameFaqs_Backend import forms
 from django.views import View
-<<<<<<< HEAD
-=======
 from django.contrib.auth import login, logout, authenticate
 
->>>>>>> 763e8d0669a705e00793ba6705565087d4a0499d
 
 class ViewMainPage(View):
     def get(self, request):
@@ -39,59 +36,80 @@ class ViewConsole(View):
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
-<<<<<<< HEAD
         data = models.Faq.objects.filter(id=id)
         return render(request, html, {'data': data})
+
+
+class ViewAllGames(View):
+    def get(self, request):
+        html = 'allgames.html'
+        games = models.Game.objects.all()
+        return render(request, html, {'games': games})
+
+
+class ViewAllConsoles(View):
+    def get(self, request):
+        html = 'allconsoles.html'
+        consoles = models.Platform.objects.all()
+        return render(request, html, {'consoles': consoles})
+
+
+class ViewAllFaqs(View):
+    def get(self, request):
+        html = 'allfaqs.html'
+        faqs = models.Faq.objects.all()
+        return render(request, html, {'faqs': faqs})
+
+
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
     form = forms.Add_FAQ
+
     def post(self, request):
-        if request.method =="POST":
-            form = Add_FAQ(request.POST)
+        if request.method == "POST":
+            form = forms.Add_FAQ(request.POST)
             if form.is_valid():
-                data= form.cleaned_data
-            Faq.objects.create(
+                data = form.cleaned_data
+            models.Faq.objects.create(
                 user=request.user,
                 name=data['name'],
                 body=data['body'],
-                game=models.Game.filter(id = id)
+                game=models.Game.filter(id=id)
             )
-            return redirect('/')
+            return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect(reverse('/'))
 
     def get(self, request):
-        form = Add_Faq()
-        return render(request, self.html, {'form':form}) 
+        form = forms.Add_Faq()
+        return render(request, self.html, {'form': form})
 
-    
+
 @method_decorator(login_required, name='dispatch')
 class AddMessageView(View):
     html = "addmessage.html"
     form = forms.Add_Message
+
     def post(self, request, id):
         if request.method == "POST":
             form = forms.Add_Message(request.POST)
 
             if form.is_valid():
-                data= form.cleaned_data
+                data = form.cleaned_data
             models.Message.objects.create(
                 user=request.user,
                 title=data['title'],
                 body=data['body'],
                 game=models.Game.filter(id=id)
             )
-            return redirect('/')
+            return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect(reverse('/'))
+
     def get(self, request):
         form = forms.Add_Message()
-        return render(request, self.html, {'form':form})
-=======
-        game = models.Game.objects.get(id=id)
-        faqs = models.Faq.objects.filter(game=game)
-        return render(request, html, {'game': game, 'faqs': faqs})
+        return render(request, self.html, {'form': form})
 
 
 def login_view(request):
@@ -139,4 +157,3 @@ def register_user_view(request):
 def logoutview(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_view'))
->>>>>>> 763e8d0669a705e00793ba6705565087d4a0499d

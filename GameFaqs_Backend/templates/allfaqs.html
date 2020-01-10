@@ -1,0 +1,13 @@
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
+
+<a href='/'><button>Home</button></a>
+<br>
+<br>
+<div>
+    <!-- <div class='faqContainer'> -->
+    {% for item in faqs%}
+    <h3>{{item.name}}</h3>
+    {% endfor %}
+    <!-- </div> -->
+</div>

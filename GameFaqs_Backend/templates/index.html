@@ -1,5 +1,13 @@
 {% load static %}
 <link rel='stylesheet' href='static/styles.css'>
+<div class='navbarStyle'>
+    <a href='/'><button>Home</button></a>
+    <a href='/allgames/'><button>All Games</button></a>
+    <a href='/allconsoles/'><button>All Consoles</button></a>
+    <a href='/allfaqs/'><button>All Faqs</button></a>
+</div>
+<br>
+<br>
 <div class='bodycontent'>
     {% for game in games%}
     <div><a href='/game/{{game.id}}'>{{ game.name }}</a></div>

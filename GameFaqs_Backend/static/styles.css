@@ -1,0 +1,10 @@
+body {
+    background: lightgrey;
+}
+
+.faqContainer {
+    margin:auto;
+    background: rgb(157, 200, 237);
+    width: 70%;
+    padding: 20px;
+}

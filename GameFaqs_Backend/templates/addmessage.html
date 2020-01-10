@@ -1,3 +1,6 @@
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
+
 <form action="/addmessage/" method="post">
     {% csrf_token %}
     {{ form.as_p }}

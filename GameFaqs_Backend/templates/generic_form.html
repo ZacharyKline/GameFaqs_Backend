@@ -1,3 +1,5 @@
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
 
 {% if page == 'register' %}
 <a href="login/">LOGIN INTO EXISTING ACCOUNT</a>
@@ -10,6 +12,6 @@
 {% endif %}
 
 <form action="" method="post">
-{% csrf_token %} {{ form.as_p }}
-<input type="submit" value="Submit" />
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Submit" />
 </form>

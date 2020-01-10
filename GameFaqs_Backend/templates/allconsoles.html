@@ -5,11 +5,10 @@
 <br>
 <br>
 <div>
-    <div class='faqContainer'>
-        {% for item in data%}
-        <h3>{{item.name}}</h3>
-        <h4>by {{item.user}}</h4>
-        <p>{{item.body}}</p>
+    <div>
+
+        {% for item in consoles %}
+        <div><a href='/platform/{{item.id}}'>{{item.console_name}}</a></div>
         {% endfor %}
     </div>
 </div>
