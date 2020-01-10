@@ -18,14 +18,20 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from GameFaqs_Backend.views import AddMessageView, AddFaqView
+from GameFaqs_Backend import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('addfaq/', AddFaqView.as_view()),
-    path('addmessage', AddMessageView.as_view())
+    path('login/', views.login_view, name="login_view"),
+    path('logout/', views.logoutview, name='logoutview'),
+    path('register/', views.register_user_view, name="registerview"),
+    path('admin/', admin.site.urls, name='admin'),
+    path('', views.ViewMainPage.as_view(), name='home'),
+    path('game/<int:id>', views.ViewGame.as_view(), name='gameview'),
+    path('platform/<int:id>', views.ViewConsole.as_view(), name='consoleview'),
+    path('faq/<int:id>', views.ViewFaqs.as_view(), name='faqview'),
+    path('addfaq/', views.AddFaqView.as_view()),
+    path('addmessage', views.AddMessageView.as_view())
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

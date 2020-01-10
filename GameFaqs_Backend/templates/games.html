@@ -1,0 +1,19 @@
+<a href='/'><button>Home</button></a>
+<br>
+<br>
+<div>
+    <div>
+        <div>{{games.name}}</div>
+        <div>{{games.console_name}}</div>
+        <div>{{games.esrb}}</div>
+        <div>{{games.release_date}}</div>
+    </div>
+    <div>
+        <ul>
+            Faqs:
+            {% for item in faqs %}
+            <p>{{item.name}} by {{item.user}}</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

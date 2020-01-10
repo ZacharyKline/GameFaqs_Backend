@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "/Users/willharris/.pyenv/versions/3.8.0/bin/python"
+=======
+    "python.pythonPath": "/Users/user/Capstone/Gamefaqs/GameFaqs_Backend/.venv/bin/python3.8"
+>>>>>>> 763e8d0669a705e00793ba6705565087d4a0499d
 }
