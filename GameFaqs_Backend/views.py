@@ -23,7 +23,11 @@ class ViewGame(View):
         games = models.Game.objects.get(id=id)
         faqs = models.Faq.objects.filter(game=games)
         messages = models.Message.objects.filter(game=games)
-        return render(request, html, {'games': games, 'faqs': faqs, 'messages':messages})
+        return render(
+            request,
+            html,
+            {'games': games, 'faqs': faqs, 'messages': messages}
+        )
 
 
 class ViewConsole(View):
@@ -33,32 +37,46 @@ class ViewConsole(View):
         games = models.Game.objects.filter(platform=console)
         return render(request, html, {'console': console, 'games': games})
 
-# class ViewMessage(View):
-#     def get(self, request, id):
-#         html = "message.html"
-#         user =  models.
-#         game =  
-#         name =  
-#         body = 
-
-
-
 
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
         data = models.Faq.objects.filter(id=id)
         return render(request, html, {'data': data})
+
+
+class ViewAllGames(View):
+    def get(self, request):
+        html = 'allgames.html'
+        games = models.Game.objects.all()
+        return render(request, html, {'games': games})
+
+
+class ViewAllConsoles(View):
+    def get(self, request):
+        html = 'allconsoles.html'
+        consoles = models.Platform.objects.all()
+        return render(request, html, {'consoles': consoles})
+
+
+class ViewAllFaqs(View):
+    def get(self, request):
+        html = 'allfaqs.html'
+        faqs = models.Faq.objects.all()
+        return render(request, html, {'faqs': faqs})
+
+
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
     form = forms.Add_FAQ
+
     def post(self, request, id):
         # game_name = models.Game.objects.get(game=game)
-        if request.method =="POST":
+        if request.method == "POST":
             form = forms.Add_FAQ(request.POST)
             if form.is_valid():
-                data= form.cleaned_data
+                data = form.cleaned_data
             # breakpoint()
             models.Faq.objects.create(
                 user=request.user,
@@ -66,27 +84,26 @@ class AddFaqView(View):
                 body=data['body'],
                 game=data['game']
             )
-            
             return HttpResponseRedirect(reverse('gameview', args=[id]))
 
     def get(self, request, id):
         instance = models.Game.objects.get(id=id)
-        data = {'game':instance, 'name':'' ,'body':''}
+        data = {'game': instance, 'name': '', 'body': ''}
         form = forms.Add_FAQ(initial=data)
-        
-        return render(request, self.html, {'form':form}) 
+        return render(request, self.html, {'form': form})
 
-    
+
 @method_decorator(login_required, name='dispatch')
 class AddMessageView(View):
     html = "addmessage.html"
     form = forms.Add_Message
+
     def post(self, request, id):
         if request.method == "POST":
             form = forms.Add_Message(request.POST)
 
             if form.is_valid():
-                data= form.cleaned_data
+                data = form.cleaned_data
             models.Message.objects.create(
                 user=request.user,
                 title=data['title'],
@@ -95,12 +112,12 @@ class AddMessageView(View):
             )
             return HttpResponseRedirect(reverse('gameview', args=[id]))
         # else:
+
     def get(self, request, id):
         instance = models.Game.objects.get(id=id)
-        data = {'game':instance, 'title':'' ,'body':''}
+        data = {'game': instance, 'title': '', 'body': ''}
         form = forms.Add_Message(initial=data)
-        return render(request, self.html, {'form':form})
-
+        return render(request, self.html, {'form': form})
 
 
 def login_view(request):

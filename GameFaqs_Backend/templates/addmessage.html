@@ -1,4 +1,15 @@
-<form action="" method="post">
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
+<div class='navbarStyle'>
+    <a href='/'><button class='buttonStyle'>Home</button></a>
+    <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+    <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+    <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    <div>
+    </div>
+</div>
+<form action="" method="post" class='contentContainer'>
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="submit">

@@ -11,13 +11,17 @@
 </div>
 <br>
 <br>
+<div class='headerInfo'>
+    <p>All Games</p>
+</div>
 <div>
-    <div class='headerInfo'>
-        <p>{{console.consoles}}</p>
-    </div>
     <div class='contentContainer'>
+
         {% for item in games %}
-        <div><a href='/game/{{item.id}}'>{{item.name}}</a></div>
+        <div>
+            <a href='/game/{{item.id}}'>{{item.name}} </a> --
+            <a href='/platform/{{item.platform.id}}'>{{item.console_name}}</a></div>
+
         {% endfor %}
     </div>
 </div>
