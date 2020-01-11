@@ -1,29 +1,36 @@
 {% load static %}
 <link rel='stylesheet' href='../static/styles.css'>
-
-<a href='/'><button>Home</button></a>
+<div class='navbarStyle'>
+    <a href='/'><button class='buttonStyle'>Home</button></a>
+    <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+    <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+    <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+</div>
 <br>
 <br>
 <div>
-    <div>
-        <div>{{games.name}}</div>
-        <div>{{games.console_name}}</div>
-        <div>{{games.esrb}}</div>
-        <div>{{games.release_date}}</div>
+    <div class='headerInfo'>
+        {{games.name}}
+        {{games.console_name}}
+        {{games.esrb}}
+        {{games.release_date}}
     </div>
     <div>
-        <ul>
-            <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a><a href="/addmessage/{{ games.id }}"><button>Add Message</button></a>
-            Faqs:
+        <div class='contentContainer'>
+            <div class=''>Faqs:</div>
             {% for item in faqs %}
             <p><a href='/faqs/{{item.id}}'>{{item.name}}</a> by <a href=''>{{item.user}}</a></p>
             {% endfor %}
-        </ul>
-        <ul>
-         Messages:
+        </div>
+        <br>
+        <div class='contentContainer'>
+            <div>Messages:</div>
             {% for item in messages %}
             <p>{{item.title}} by {{item.user}}</p>
             {% endfor %}
-        </ul>    
+        </div>
+        <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a>
+        <a href="/addmessage/{{ games.id }}"><button>Add Message</button></a>
     </div>
 </div>

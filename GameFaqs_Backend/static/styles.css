@@ -1,25 +1,36 @@
 body {
     background: lightgrey;
+    margin: 0px;
+    padding: 0px;
+    color: rgb(48, 48, 48);
 }
 
-.faqContainer {
+.contentContainer {
     margin:auto;
     background: rgb(157, 200, 237);
     width: 70%;
     padding: 20px;
+    border: 3px solid rgb(63, 63, 63);
 }
 
 .navbarStyle {
     background: #1509f4;
     height: 10%;
-    margin: auto;
+    margin-top: 0px;
+    margin: 0;
 }
 
 .buttonStyle {
-    font-size: 6vh;
+    font-size: 7vh;
     border: 3px solid black;
     background: #a39fe9;
     font-weight: bolder;
-    color: rgb(48, 48, 48);
 
+}
+
+.headerInfo {
+    display: flex;
+    justify-content: space-around;
+    font-weight: bolder;
+    font-size: 8vh
 }

@@ -5,27 +5,12 @@
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
     <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
     <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
-    <a href='/login/'><button class='buttonStyle'>Login Here</button></a>
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
     <div>
     </div>
 </div>
 <br>
 <br>
-<div class='bodycontent'>
+<div class='contentContainer'>
 
-    <div>
-        <h1>{{console.consoles}}</h1>
-        <div>
-            <p>Games:</p>
-            <ul>
-                {% for item in games %}
-                <div><a href='/game/{{item.id}}'>{{item.name}}</a></div>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-    {% for plat in consoles%}
-    <div><a href='/platform/{{plat.id}}'>{{ plat.consoles }}</a></div>
-    {% endfor %}
 </div>
