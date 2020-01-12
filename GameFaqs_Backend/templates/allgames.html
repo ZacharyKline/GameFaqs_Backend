@@ -19,8 +19,11 @@
 
         {% for item in games %}
         <div>
-            <a href='/game/{{item.id}}'>{{item.name}} </a> --
-            <a href='/platform/{{item.platform.id}}'>{{item.console_name}}</a></div>
+            <p class='listItem'>
+                <a href='/game/{{item.id}}'>{{item.name}} </a> --
+                <a href='/platform/{{item.platform.id}}'>{{item.console_name}}</a>
+            </p>
+        </div>
 
         {% endfor %}
     </div>

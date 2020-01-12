@@ -17,7 +17,9 @@
     </div>
     <div class='contentContainer'>
         {% for item in games %}
-        <div><a href='/game/{{item.id}}'>{{item.name}}</a></div>
+        <p class='listItem'>
+            <a href='/game/{{item.id}}'>{{item.name}}</a>
+        </p>
         {% endfor %}
     </div>
 </div>

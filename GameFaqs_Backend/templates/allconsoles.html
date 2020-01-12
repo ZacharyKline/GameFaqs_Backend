@@ -15,9 +15,11 @@
     <p>All Consoles</p>
 </div>
 <div>
-    <div class='contentContainer'>
+    <div class='consoleContainer'>
         {% for item in consoles %}
-        <div><a href='/platform/{{item.id}}'>{{item.consoles}}</a></div>
+        <div class='consoleCard'>
+            <a href='/platform/{{item.id}}'>{{item.consoles}}</a>
+        </div>
         {% endfor %}
     </div>
 </div>

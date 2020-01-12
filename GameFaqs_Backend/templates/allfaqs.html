@@ -17,7 +17,13 @@
 <div class='contentContainer'>
     <!-- <div class='faqContainer'> -->
     {% for item in faqs%}
-    <h3>{{item.name}}</h3>
+
+    <div>
+        <p class='listItem'>
+            <a href='/faqs/{{item.id}}'>{{item.name}}</a>
+            Written by: <a href=''>{{item.user}}</a>
+        </p>
+    </div>
     {% endfor %}
     <!-- </div> -->
 </div>

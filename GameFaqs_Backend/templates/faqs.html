@@ -14,9 +14,11 @@
 <div>
     <div class='contentContainer'>
         {% for item in data%}
-        <h3>{{item.name}}</h3>
-        <h4>by {{item.user}}</h4>
-        <p>{{item.body}}</p>
+        <div class='faqItem'>
+            <h3>{{item.name}}</h3>
+            <h4>by {{item.user}}</h4>
+            <p>{{item.body}}</p>
+        </div>
         {% endfor %}
     </div>
 </div>
