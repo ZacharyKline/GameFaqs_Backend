@@ -17,17 +17,22 @@
         {{games.release_date}}
     </div>
     <div>
+        <div class='headerInfo'>Faqs:</div>
         <div class='contentContainer'>
-            <div class=''>Faqs:</div>
             {% for item in faqs %}
-            <p><a href='/faqs/{{item.id}}'>{{item.name}}</a> by <a href=''>{{item.user}}</a></p>
+            <p class='listItem'>
+                <a href='/faqs/{{item.id}}'>{{item.name}}</a>
+                by <a href=''>{{item.user}}</a>
+            </p>
             {% endfor %}
         </div>
         <br>
+        <div class='headerInfo'>Messages:</div>
         <div class='contentContainer'>
-            <div>Messages:</div>
             {% for item in messages %}
-            <p>{{item.title}} by {{item.user}}</p>
+            <p class='listItem'>
+                <a href=''>{{item.title}}</a>
+                by <a href=''>{{item.user}}</a></p>
             {% endfor %}
         </div>
         <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a>
