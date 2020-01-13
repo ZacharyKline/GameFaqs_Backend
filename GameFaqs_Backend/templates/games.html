@@ -23,7 +23,7 @@
         <div class='contentContainer'>
             {% for item in faqs %}
             <p class='listItem'>
-                <a href='/faq/{{item.id}}/'>{{item.name}}</a>
+                <a href='/faqs/{{item.id}}/'>{{item.name}}</a>
                 by <a href=''>{{item.user}}</a>
             </p>
             {% endfor %}
@@ -39,7 +39,7 @@
                 <p>{{item.title}} by {{item.user}}</p>
             </a>
             <p class='listItem'>
-                <a href=''>{{item.title}}</a>
+                <a href="/message/{{ item.id }}/">{{item.title}}</a>
                 by <a href=''>{{item.user}}</a></p>
             {% endfor %}
         </div>
