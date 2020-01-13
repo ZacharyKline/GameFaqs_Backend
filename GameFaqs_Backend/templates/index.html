@@ -12,19 +12,31 @@
 <br>
 <br>
 <div>
-    <div class='headerInfo'>Newest Faqs</div>
+    <div class='headerInfo'>Newest Faqs:</div>
     <div class='contentContainer'>
         {% for item in faqs%}
         <p class='frontlistItem'>
-            <a href='/game/{{item.game.id}}'>{{item.game}}</a> for: <a
-                href='/platform/{{item.game.platform.id}}'>{{item.game.console_name}}</a>
+            <a href='/faqs/{{item.id}}'>{{item.name}}</a>
             <br>
-            <a href='/faqs/{{item.id}}'>{{item.name}}</a> written by: <a href=''>{{item.user}}</a>
+            Game: <a href='/game/{{item.game.id}}'>{{item.game_name}}</a> for:
+            <a href='/platform/{{item.game.platform.id}}'>{{item.game.console_name}}</a>
+            <br>
+            Written by: <a href=''>{{item.user}}</a>
         </p>
         {% endfor %}
     </div>
+    <br>
     <div class='headerInfo'>Newest Messages:</div>
     <div class='contentContainer'>
-
+        {% for item in messages %}
+        <p class='frontlistItem'>
+            <a href=''>{{ item.title }}</a>
+            <br>
+            Game: <a href=''>{{item.game.name}}</a>
+            <br>
+            written by: <a href=''>{{item.user}}</a>
+        </p>
+        {% endfor %}
     </div>
 </div>
+<br>
