@@ -26,3 +26,9 @@ class Add_Message(ModelForm):
     class Meta:
         model = models.Message
         fields = ['title', 'body', 'game']
+
+
+class EditUserForm(ModelForm):
+    class Meta:
+        model = models.GFUser
+        fields = ['username', 'password', 'signature', 'website']

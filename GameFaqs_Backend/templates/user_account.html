@@ -5,14 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link rel='stylesheet' href='../static/styles.css'>
 </head>
 <body>
-    <h1>User Detail Page</h1>
+<div class='navbarStyle'>
+    <a href='/'><button class='buttonStyle'>Home</button></a>
+    <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+    <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+    <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+   
+</div>
+    <h1>User Account Page</h1>
+    <div>User Faqs:</div> 
+    <div class="userCard">
     {% for use_faq in user_faqs %}
-        <p>{{use_faq.name}}</p>
-        <p>{{use_faq.user}}</p>
-        <p>{{use_faq.game}}</p>
-        <p>{{use_faq.body}}</p>
-    {% endfor %}    
+        <div class="">{{use_faq.user}}</div>
+        <br>
+        <div>{{use_faq.name}}</div>
+        <br>
+        <div>{{use_faq.game}}</div>
+        <br>
+        <div>{{use_faq.body}}</div>
+    {% endfor %}
+</div>
 </body>
 </html>

@@ -34,7 +34,8 @@ urlpatterns = [
     path('allconsoles/', views.ViewAllConsoles.as_view()),
     path('allfaqs/', views.ViewAllFaqs.as_view()),
     path('addfaq/<int:id>/', views.AddFaqView.as_view()),
-    path('addmessage/<int:id>', views.AddMessageView.as_view())
+    path('addmessage/<int:id>', views.AddMessageView.as_view()),
+    path('edituser/<int:pk>', views.UserAccountEditView.as_view(), name='edituser')
 ]
 
 if settings.DEBUG:

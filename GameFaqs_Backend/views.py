@@ -4,10 +4,12 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from GameFaqs_Backend import models
-from GameFaqs_Backend import forms
+from GameFaqs_Backend.forms import EditUserForm, LoginForm, RegisterForm, Add_FAQ, Add_Message
 from django.views import View
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import TemplateView
+from django.views.generic.edit import UpdateView
+
 import logging
 
 
@@ -71,7 +73,7 @@ class ViewAllFaqs(View):
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
-    form = forms.Add_FAQ
+    form = Add_FAQ
 
     def post(self, request, id):
         # game_name = models.Game.objects.get(game=game)
@@ -98,7 +100,7 @@ class AddFaqView(View):
 @method_decorator(login_required, name='dispatch')
 class AddMessageView(View):
     html = "addmessage.html"
-    form = forms.Add_Message
+    form = Add_Message
 
     def post(self, request, id):
         if request.method == "POST":
@@ -185,3 +187,9 @@ class UserAccountView(TemplateView):
         
         return render(request, self.template_name, {"user_faqs": user_faqs} )
     
+
+class UserAccountEditView(UpdateView):
+    model = GFUser
+    fields = ['username', 'password', 'signature', 'website']
+    template_name= 'gfuser_update_form.html'
+
