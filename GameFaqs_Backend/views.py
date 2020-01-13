@@ -12,17 +12,21 @@ from django.contrib.auth import login, logout, authenticate
 class ViewMainPage(View):
     def get(self, request):
         html = 'index.html'
-        games = models.Game.objects.all()
-        consoles = models.Platform.objects.all()
-        return render(request, html, {'games': games, 'consoles': consoles})
+        faqs = models.Faq.objects.all().order_by('-post_time')
+        messages = models.Message.objects.all().order_by('-datetime')
+        return render(request, html, {
+            'faqs': faqs,
+            'messages': messages
+        })
 
 
 class ViewGame(View):
     def get(self, request, id):
         html = 'games.html'
         games = models.Game.objects.get(id=id)
-        faqs = models.Faq.objects.filter(game=games)
-        messages = models.Message.objects.filter(game=games)
+        faqs = models.Faq.objects.filter(game=games).order_by('-post_time')
+        messages = models.Message.objects.filter(
+            game=games).order_by('-datetime')
         return render(
             request,
             html,
@@ -37,11 +41,13 @@ class ViewConsole(View):
         games = models.Game.objects.filter(platform=console)
         return render(request, html, {'console': console, 'games': games})
 
+
 class ViewMessage(View):
     def get(self, request, id):
         html = "message.html"
         data = models.Message.objects.filter(id=id)
-        return render(request, html, {'data':data})
+        return render(request, html, {'data': data})
+
 
 class ViewFaqs(View):
     def get(self, request, id):
@@ -144,6 +150,7 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
+
 
 def register_user_view(request):
     html = 'generic_form.html'

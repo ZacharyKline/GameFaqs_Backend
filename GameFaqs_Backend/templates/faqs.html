@@ -1,5 +1,5 @@
 {% load static %}
-<link rel='stylesheet' href='../static/styles.css'>
+<link rel='stylesheet' href='../../static/styles.css'>
 <div class='navbarStyle'>
     <a href='/'><button class='buttonStyle'>Home</button></a>
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
@@ -14,13 +14,13 @@
 <div>
     <div>
         <ul>
-    <div class='contentContainer'>
-        {% for item in data%}
-        <div class='faqItem'>
-            <h3>{{item.name}}</h3>
-            <h4>by {{item.user}}</h4>
-            <p>{{item.body}}</p>
-        </div>
-        {% endfor %}
+            <div class='contentContainer'>
+                {% for item in data%}
+                <div class='faqItem'>
+                    <h3>{{item.name}}</h3>
+                    <h4>by {{item.user}}</h4>
+                    <p>{{item.body}}</p>
+                </div>
+                {% endfor %}
+            </div>
     </div>
-</div>

@@ -58,6 +58,8 @@ class Faq(models.Model):
                              null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default="Steve")
     body = models.TextField()
+    post_time = models.DateTimeField(
+        default=timezone.now, blank=True, null=True)
 
     def __str__(self):
         return f'{self.game} - {self.name}'
