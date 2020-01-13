@@ -6,21 +6,19 @@
     <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
     <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
     <a href='/login/'><button class='buttonStyle'>Login</button></a>
-    <div>
-    </div>
 </div>
 <br>
 <br>
 <div>
-    <div class='headerInfo'>
-        <p>{{console.consoles}}</p>
-    </div>
-    <div class='headerInfo'>Games:</div>
-    <div class='contentContainer'>
-        {% for item in games %}
-        <p class='listItem'>
-            <a href='/game/{{item.id}}'>{{item.name}}</a>
-        </p>
-        {% endfor %}
+    <div>
+        <div class='contentContainer'>
+            {% for item in data%}
+            <div class='faqItem'>
+                <h3>{{item.title}}</h3>
+                <h4>by {{item.user}}</h4>
+                <p>{{item.body}}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
