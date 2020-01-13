@@ -1,14 +1,25 @@
-<a href='/'><button>Home</button></a>
+{% load static %}
+<link rel='stylesheet' href='../static/styles.css'>
+<div class='navbarStyle'>
+    <a href='/'><button class='buttonStyle'>Home</button></a>
+    <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+    <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+    <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    <div>
+    </div>
+</div>
 <br>
 <br>
 <div>
-    <h1>{{console.consoles}}</h1>
-    <div>
-        <p>Games:</p>
-        <ul>
-            {% for item in games %}
-            <div><a href='/game/{{item.id}}'>{{item.name}}</a></div>
-            {% endfor %}
-        </ul>
+    <div class='headerInfo'>
+        <p>{{console.consoles}}</p>
+    </div>
+    <div class='contentContainer'>
+        {% for item in games %}
+        <p class='listItem'>
+            <a href='/game/{{item.id}}'>{{item.name}}</a>
+        </p>
+        {% endfor %}
     </div>
 </div>

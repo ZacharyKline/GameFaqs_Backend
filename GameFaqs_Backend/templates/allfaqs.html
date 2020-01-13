@@ -11,14 +11,19 @@
 </div>
 <br>
 <br>
-<div>
-    <div class='contentContainer'>
-        {% for item in data%}
-        <div class='faqItem'>
-            <h3>{{item.name}}</h3>
-            <h4>by {{item.user}}</h4>
-            <p>{{item.body}}</p>
-        </div>
-        {% endfor %}
+<div class='headerInfo'>
+    <p>All Faqs</p>
+</div>
+<div class='contentContainer'>
+    <!-- <div class='faqContainer'> -->
+    {% for item in faqs%}
+
+    <div>
+        <p class='listItem'>
+            <a href='/faqs/{{item.id}}'>{{item.name}}</a>
+            Written by: <a href=''>{{item.user}}</a>
+        </p>
     </div>
+    {% endfor %}
+    <!-- </div> -->
 </div>
