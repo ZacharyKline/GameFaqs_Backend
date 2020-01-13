@@ -185,7 +185,7 @@ class UserAccountView(TemplateView):
         my_user = models.GFUser.objects.get(pk=pk)
         user_faqs = models.Faq.objects.filter(user=my_user)
         
-        return render(request, self.template_name, {"user_faqs": user_faqs} )
+        return render(request, self.template_name, {"user_faqs": user_faqs, "my_user": my_user} )
     
 
 class UserAccountEditView(UpdateView):

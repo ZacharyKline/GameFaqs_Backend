@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {% load static %}
-    <link rel='stylesheet' href='../static/styles.css'>
+    <link rel='stylesheet' href='/static/styles.css'>
 </head>
 <body>
 <div class='navbarStyle'>
@@ -18,7 +18,8 @@
    
 </div>
     <h1>User Account Page</h1>
-    <span>User Faqs:</span> 
+    <span>User Faqs:</span>
+    <a href="/edituser/{{ my_user.id }}/">Edit Button</a>  
     <div class="userCard">
     {% for use_faq in user_faqs %}
         <div class="">{{use_faq.user}}</div>
@@ -28,6 +29,7 @@
         <div>{{use_faq.game}}</div>
         <br>
         <div>{{use_faq.body}}</div>
+        
     {% endfor %}
 </div>
 </body>
