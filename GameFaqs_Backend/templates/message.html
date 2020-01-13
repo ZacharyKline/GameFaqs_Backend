@@ -1,0 +1,14 @@
+<a href='/'><button>Home</button></a>
+<br>
+<br>
+<div>
+    <div>
+        <ul>
+            {% for item in data%}
+            <h3>{{item.title}}</h3>
+            <h4>by {{item.user}}</h4>
+            <p>{{item.body}}</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
