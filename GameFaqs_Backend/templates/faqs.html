@@ -14,13 +14,13 @@
 <div>
     <div>
         <ul>
-    <div class='contentContainer'>
-        {% for item in data%}
-        <div class='faqItem'>
-            <h3>{{item.name}}</h3>
-            <h4>by {{item.user}}</h4>
-            <p>{{item.body}}</p>
-        </div>
-        {% endfor %}
+            <div class='contentContainer'>
+                {% for item in data%}
+                <div class='faqItem'>
+                    <h3>{{item.name}}</h3>
+                    <h4>by {{item.user}}</h4>
+                    <p>{{item.body}}</p>
+                </div>
+                {% endfor %}
+            </div>
     </div>
-</div>
