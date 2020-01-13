@@ -31,7 +31,12 @@ urlpatterns = [
     path('faq/<int:id>/', views.ViewFaqs.as_view(), name='faqview'),
     path('message/<int:id>/', views.ViewMessage.as_view(), name='messageview'),
     path('addfaq/<int:id>/', views.AddFaqView.as_view(), name='addfaq'),
-    path('addmessage/<int:id>', views.AddMessageView.as_view(), name='addmessage')
+    path('addmessage/<int:id>', views.AddMessageView.as_view(), name='addmessage'),
+    path('allgames/', views.ViewAllGames.as_view()),
+    path('allconsoles/', views.ViewAllConsoles.as_view()),
+    path('allfaqs/', views.ViewAllFaqs.as_view()),
+    path('addfaq/<int:id>/', views.AddFaqView.as_view()),
+    path('addmessage/<int:id>', views.AddMessageView.as_view())
 ]
 
 if settings.DEBUG:

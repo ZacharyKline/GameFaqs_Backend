@@ -11,15 +11,19 @@
 </div>
 <br>
 <br>
-<div>
-    <div class='headerInfo'>
-        <p>{{console.consoles}}</p>
-    </div>
-    <div class='contentContainer'>
-        {% for item in games %}
+<div class='headerInfo'>
+    <p>All Faqs</p>
+</div>
+<div class='contentContainer'>
+    <!-- <div class='faqContainer'> -->
+    {% for item in faqs%}
+
+    <div>
         <p class='listItem'>
-            <a href='/game/{{item.id}}'>{{item.name}}</a>
+            <a href='/faqs/{{item.id}}'>{{item.name}}</a>
+            Written by: <a href=''>{{item.user}}</a>
         </p>
-        {% endfor %}
     </div>
+    {% endfor %}
+    <!-- </div> -->
 </div>

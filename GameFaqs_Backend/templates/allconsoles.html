@@ -1,5 +1,5 @@
 {% load static %}
-<link rel='stylesheet' href='../../static/styles.css'>
+<link rel='stylesheet' href='../static/styles.css'>
 <div class='navbarStyle'>
     <a href='/'><button class='buttonStyle'>Home</button></a>
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
@@ -9,8 +9,17 @@
     <div>
     </div>
 </div>
-<form action="" method="post" class='contentContainer'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="submit">
-</form>
+<br>
+<br>
+<div class='headerInfo'>
+    <p>All Consoles</p>
+</div>
+<div>
+    <div class='consoleContainer'>
+        {% for item in consoles %}
+        <div class='consoleCard'>
+            <a href='/platform/{{item.id}}'>{{item.consoles}}</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

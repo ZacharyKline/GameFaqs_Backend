@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.models import User
-from GameFaqs_Backend import models, views
+# from django.contrib.auth.models import User
+from GameFaqs_Backend import models
 
 
 class LoginForm(forms.Form):
@@ -13,8 +13,6 @@ class RegisterForm(ModelForm):
     class Meta:
         model = models.GFUser
         fields = ['username', 'password']
-# Register Form/Create Us
-# Create FAQ
 
 
 class Add_FAQ(ModelForm):
@@ -28,4 +26,3 @@ class Add_Message(ModelForm):
     class Meta:
         model = models.Message
         fields = ['title', 'body', 'game']
-        
