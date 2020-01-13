@@ -12,12 +12,14 @@
 <div>
     <div class='headerInfo'>
         {{games.name}}
-        {{games.console_name}}
-        {{games.esrb}}
+        //
         {{games.release_date}}
     </div>
     <div>
-        <div class='headerInfo'>Faqs:</div>
+        <div class='headerContent'>
+            <div class='headerInfo'>Faqs:</div>
+            <a href="/addfaq/{{ games.id }}"><button class='addButton'>Add Faq</button></a>
+        </div>
         <div class='contentContainer'>
             {% for item in faqs %}
             <p class='listItem'>
@@ -27,7 +29,10 @@
             {% endfor %}
         </div>
         <br>
-        <div class='headerInfo'>Messages:</div>
+        <div class='headerContent'>
+            <div class='headerInfo'>Messages:</div>
+            <a href="/addmessage/{{ games.id }}"><button class='addButton'>Add Message</button></a>
+        </div>
         <div class='contentContainer'>
             {% for item in messages %}
             <p class='listItem'>
@@ -35,7 +40,5 @@
                 by <a href=''>{{item.user}}</a></p>
             {% endfor %}
         </div>
-        <a href="/addfaq/{{ games.id }}"><button>Add Faq</button></a>
-        <a href="/addmessage/{{ games.id }}"><button>Add Message</button></a>
     </div>
 </div>

@@ -14,7 +14,14 @@ class ViewMainPage(View):
         html = 'index.html'
         games = models.Game.objects.all()
         consoles = models.Platform.objects.all()
-        return render(request, html, {'games': games, 'consoles': consoles})
+        faqs = models.Faq.objects.all().order_by('-post_time')
+        messages = models.Message.objects.all().order_by('-post_time')
+        return render(request, html, {
+            'games': games,
+            'consoles': consoles,
+            'faqs': faqs,
+            'messages': messages
+        })
 
 
 class ViewGame(View):
