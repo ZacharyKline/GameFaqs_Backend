@@ -33,22 +33,18 @@ class ViewConsole(View):
         games = models.Game.objects.filter(platform=console)
         return render(request, html, {'console': console, 'games': games})
 
-# class ViewMessage(View):
-#     def get(self, request, id):
-#         html = "message.html"
-#         user =  models.
-#         game =  
-#         name =  
-#         body = 
-
-
-
+class ViewMessage(View):
+    def get(self, request, id):
+        html = "message.html"
+        data = models.Message.objects.filter(id=id)
+        return render(request, html, {'data':data})
 
 class ViewFaqs(View):
     def get(self, request, id):
         html = 'faqs.html'
         data = models.Faq.objects.filter(id=id)
         return render(request, html, {'data': data})
+
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
@@ -122,10 +118,6 @@ def login_view(request):
 
     form = LoginForm()
     return render(request, html, {'form': form, 'page': page})
-
-# def messagedetailview(request):
-#     html = "messagedetail.html"
-
 
 def register_user_view(request):
     html = 'generic_form.html'
