@@ -1,5 +1,5 @@
 {% load static %}
-<link rel='stylesheet' href='../static/styles.css'>
+<link rel='stylesheet' href='../../static/styles.css'>
 <div class='navbarStyle'>
     <a href='/'><button class='buttonStyle'>Home</button></a>
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
@@ -35,7 +35,9 @@
         </div>
         <div class='contentContainer'>
             {% for item in messages %}
-           <a href="/message/{{ item.id }}/"> <p>{{item.title}} by {{item.user}}</p></a>
+            <a href="/message/{{ item.id }}/">
+                <p>{{item.title}} by {{item.user}}</p>
+            </a>
             <p class='listItem'>
                 <a href=''>{{item.title}}</a>
                 by <a href=''>{{item.user}}</a></p>
