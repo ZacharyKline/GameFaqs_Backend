@@ -19,6 +19,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from GameFaqs_Backend import views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('login/', views.login_view, name="login_view"),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', views.ViewMainPage.as_view(), name='home'),
     path('game/<int:id>/', views.ViewGame.as_view(), name='gameview'),
+    path('useraccount/<int:id>/', views.UserAccountView.as_view(), name='userdetail'),
     path('platform/<int:id>/',
          views.ViewConsole.as_view(), name='consoleview'),
     path('faqs/<int:id>/', views.ViewFaqs.as_view(), name='faqview'),
@@ -38,7 +40,8 @@ urlpatterns = [
     path('allconsoles/', views.ViewAllConsoles.as_view()),
     path('allfaqs/', views.ViewAllFaqs.as_view()),
     path('addfaq/<int:id>/', views.AddFaqView.as_view()),
-    path('addmessage/<int:id>', views.AddMessageView.as_view())
+    path('addmessage/<int:id>/', views.AddMessageView.as_view()),
+    path('edituser/<int:pk>/', views.UserAccountEditView.as_view(), name='edituser')
 ]
 
 if settings.DEBUG:

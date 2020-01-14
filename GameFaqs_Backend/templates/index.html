@@ -9,6 +9,7 @@
     <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
     {% else %}
     <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
     {% endif %}
     <div>
     </div>
@@ -27,7 +28,7 @@
             Game: <a href='/game/{{item.game.id}}'>{{item.game_name}}</a> for:
             <a href='/platform/{{item.game.platform.id}}'>{{item.game.console_name}}</a>
             <br>
-            Written by: <a href=''>{{item.user}}</a>
+            Written by: <a href='/useraccount/{{ item.user.id }}/'>{{item.user}}</a>
         </p>
         {% endfor %}
     </div>
