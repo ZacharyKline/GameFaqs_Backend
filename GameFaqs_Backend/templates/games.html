@@ -34,7 +34,7 @@
             <p class='listItem'>
                 <a href='/faqs/{{item.id}}/'>{{item.name}}</a>
                 <br>
-                by <a href=''>{{item.user}}</a>
+                by <a href = "/useraccount/{{ item.user.id }}">{{item.user}}</a>
             </p>
             {% endfor %}
         </div>

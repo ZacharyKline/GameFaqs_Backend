@@ -43,7 +43,7 @@
             <br>
             Game: <a href=''>{{item.game.name}}</a>
             <br>
-            written by: <a href=''>{{item.user}}</a>
+            written by: <a href = "/useraccount/{{ item.user.id }}">{{item.user}}</a>
         </p>
         {% endfor %}
     </div>
