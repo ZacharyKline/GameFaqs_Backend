@@ -23,7 +23,7 @@
                 {% for item in data%}
                 <div class='faqItem'>
                     <h3>{{item.name}}</h3>
-                    <h4>by {{item.user}}</h4>
+                    <a href = "/useraccount/{{ item.user.id }}"><h4>by {{item.user}}</h4></a>
                     <p>{{item.body}}</p>
                 </div>
                 {% endfor %}

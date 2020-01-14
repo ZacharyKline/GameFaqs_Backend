@@ -28,7 +28,7 @@
             Game: <a href='/game/{{item.game.id}}'>{{item.game_name}}</a> for:
             <a href='/platform/{{item.game.platform.id}}'>{{item.game.console_name}}</a>
             <br>
-            Written by: <a href='/useraccount/{{ item.user.pk }}/'>{{item.user}}</a>
+            Written by: <a href = "/useraccount/{{ item.user.id }}">{{item.user}}</a>
         </p>
     </div>
     {% endfor %}
