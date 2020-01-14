@@ -1,17 +1,12 @@
-from GameFaqs_Backend.forms import LoginForm, RegisterForm
 from GameFaqs_Backend.models import GFUser
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from GameFaqs_Backend import models
-from GameFaqs_Backend.forms import EditUserForm, LoginForm, RegisterForm, Add_FAQ, Add_Message
+from GameFaqs_Backend import models, forms
 from django.views import View
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.contrib.auth.decorators import login_required
-
-
 
 
 class ViewMainPage(View):
@@ -82,22 +77,24 @@ class ViewAllFaqs(View):
         logged_in_user_id = request.user.id
         html = 'allfaqs.html'
         faqs = models.Faq.objects.all()
-        return render(request, html, {'faqs': faqs, 'logged_in_user_id':logged_in_user_id})
+        return render(request, html, {
+            'faqs': faqs,
+            'logged_in_user_id': logged_in_user_id
+        })
 
 
 @method_decorator(login_required, name='dispatch')
 class AddFaqView(View):
     html = "addfaq.html"
-    form = Add_FAQ
+    form = forms.Add_FAQ
 
     def post(self, request, id):
-        my_user = models.GFUser.objects.get(pk=pk)
         # game_name = models.Game.objects.get(game=game)
         if request.method == "POST":
             form = forms.Add_FAQ(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-            
+
             models.Faq.objects.create(
                 user=request.user,
                 name=data['name'],
@@ -110,14 +107,13 @@ class AddFaqView(View):
         instance = models.Game.objects.get(id=id)
         data = {'game': instance, 'name': '', 'body': ''}
         form = forms.Add_FAQ(initial=data)
-        return render(request, self.html, {'form': form, 'my_user':my_user})
+        return render(request, self.html, {'form': form})
 
 
 @method_decorator(login_required, name='dispatch')
 class AddMessageView(View):
     html = "addmessage.html"
-    form = Add_Message
-    
+    form = forms.Add_Message
 
     def post(self, request, id):
         if request.method == "POST":
@@ -144,7 +140,7 @@ def login_view(request):
     html = 'generic_form.html'
     page = 'login'
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = forms.LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user = authenticate(
@@ -157,14 +153,13 @@ def login_view(request):
                 request.GET.get('next', reverse('home'))
             )
 
-    form = LoginForm()
+    form = forms.LoginForm()
     return render(request, html, {'form': form, 'page': page})
 
 
 def register_user_view(request):
     html = 'generic_form.html'
     page = 'register'
-    my_user = models.GFUser.objects.get(pk=pk)
     if request.method == "POST":
 
         form = forms.RegisterForm(request.POST)
@@ -179,8 +174,11 @@ def register_user_view(request):
 
             login(request, u)
             return HttpResponseRedirect(reverse('home'))
-    form = RegisterForm()
-    return render(request, html, {'form': form, 'page': page, 'my_user': my_user})
+    form = forms.RegisterForm()
+    return render(request, html, {
+        'form': form,
+        'page': page,
+    })
 
 
 def logoutview(request):
@@ -198,8 +196,17 @@ class UserAccountView(TemplateView):
     def get(self, request, id, *args, **kwargs):
         my_user = models.GFUser.objects.get(id=id)
         user_faqs = models.Faq.objects.filter(user=my_user)
-        
-        return render(request, self.template_name, {"user_faqs": user_faqs, "my_user": my_user} )
+        user_messages = models.Message.objects.filter(user=my_user)
+
+        return render(
+            request,
+            self.template_name,
+            {
+                "user_faqs": user_faqs,
+                "my_user": my_user,
+                'user_messages': user_messages
+            }
+        )
 
 
 # class UserAccountEditView(UpdateView):
