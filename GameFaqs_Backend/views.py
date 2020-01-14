@@ -9,18 +9,21 @@ from django.views import View
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
+from django.contrib.auth.decorators import login_required
 
-import logging
+
 
 
 class ViewMainPage(View):
     def get(self, request):
         html = 'index.html'
         faqs = models.Faq.objects.all().order_by('-post_time')
+        logged_in_user_id = request.user.id
         messages = models.Message.objects.all().order_by('-datetime')
         return render(request, html, {
             'faqs': faqs,
-            'messages': messages
+            'messages': messages,
+            'logged_in_user_id': logged_in_user_id
         })
 
 
@@ -76,9 +79,10 @@ class ViewAllConsoles(View):
 
 class ViewAllFaqs(View):
     def get(self, request):
+        logged_in_user_id = request.user.id
         html = 'allfaqs.html'
         faqs = models.Faq.objects.all()
-        return render(request, html, {'faqs': faqs})
+        return render(request, html, {'faqs': faqs, 'logged_in_user_id':logged_in_user_id})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -87,12 +91,13 @@ class AddFaqView(View):
     form = Add_FAQ
 
     def post(self, request, id):
+        my_user = models.GFUser.objects.get(pk=pk)
         # game_name = models.Game.objects.get(game=game)
         if request.method == "POST":
             form = forms.Add_FAQ(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-            # breakpoint()
+            
             models.Faq.objects.create(
                 user=request.user,
                 name=data['name'],
@@ -105,13 +110,14 @@ class AddFaqView(View):
         instance = models.Game.objects.get(id=id)
         data = {'game': instance, 'name': '', 'body': ''}
         form = forms.Add_FAQ(initial=data)
-        return render(request, self.html, {'form': form})
+        return render(request, self.html, {'form': form, 'my_user':my_user})
 
 
 @method_decorator(login_required, name='dispatch')
 class AddMessageView(View):
     html = "addmessage.html"
     form = Add_Message
+    
 
     def post(self, request, id):
         if request.method == "POST":
@@ -126,7 +132,6 @@ class AddMessageView(View):
                 game=data['game']
             )
             return HttpResponseRedirect(reverse('gameview', args=[id]))
-        # else:
 
     def get(self, request, id):
         instance = models.Game.objects.get(id=id)
@@ -139,7 +144,7 @@ def login_view(request):
     html = 'generic_form.html'
     page = 'login'
     if request.method == 'POST':
-        form = forms.LoginForm(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user = authenticate(
@@ -159,6 +164,7 @@ def login_view(request):
 def register_user_view(request):
     html = 'generic_form.html'
     page = 'register'
+    my_user = models.GFUser.objects.get(pk=pk)
     if request.method == "POST":
 
         form = forms.RegisterForm(request.POST)
@@ -174,7 +180,7 @@ def register_user_view(request):
             login(request, u)
             return HttpResponseRedirect(reverse('home'))
     form = RegisterForm()
-    return render(request, html, {'form': form, 'page': page})
+    return render(request, html, {'form': form, 'page': page, 'my_user': my_user})
 
 
 def logoutview(request):
@@ -189,12 +195,12 @@ class UserAccountView(TemplateView):
         context = super().get_context_data(**kwargs)
         return context
 
-    def get(self, request, pk, *args, **kwargs):
-        my_user = models.GFUser.objects.get(pk=pk)
+    def get(self, request, id, *args, **kwargs):
+        my_user = models.GFUser.objects.get(id=id)
         user_faqs = models.Faq.objects.filter(user=my_user)
         
         return render(request, self.template_name, {"user_faqs": user_faqs, "my_user": my_user} )
-    
+
 
 class UserAccountEditView(UpdateView):
     model = GFUser

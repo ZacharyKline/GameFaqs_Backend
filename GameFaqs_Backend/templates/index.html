@@ -6,6 +6,7 @@
     <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
     <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
     <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
     <div>
     </div>
 </div>
@@ -21,7 +22,7 @@
             Game: <a href='/game/{{item.game.id}}'>{{item.game_name}}</a> for:
             <a href='/platform/{{item.game.platform.id}}'>{{item.game.console_name}}</a>
             <br>
-            Written by: <a href=''>{{item.user}}</a>
+            Written by: <a href='/useraccount/{{ item.user.id }}/'>{{item.user}}</a>
         </p>
         {% endfor %}
     </div>
