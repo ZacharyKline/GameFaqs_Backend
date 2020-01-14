@@ -11,6 +11,7 @@ body {
     padding: 20px;
     border: 3px solid rgb(63, 63, 63);
     margin: auto;
+    border-radius: 20px;
 }
 
 .navbarStyle {
@@ -40,13 +41,14 @@ body {
     align-items: center;
     justify-content: center;
     margin: 10px;
-    border: 4px solid black;
     width: 20%;
     height: 20vh;
     position: relative;
-    background: #d7d7d7;
+    background: rgb(73, 167, 222);
     font-weight: bolder;
     font-size: 30px;
+    border: 3px solid rgb(78, 177, 235);
+    border-radius: 7px;
 
 }
 
@@ -59,14 +61,16 @@ body {
     width: 70%;
     padding: 20px;
     border: 3px solid rgb(63, 63, 63);
+    border-radius: 12px;
+
 }
 
 .listItem {
-    height: 5%;
     width: 95%;
     background: rgb(73, 167, 222);
     padding: 10px;
     border: 2px solid rgb(78, 177, 235);
+    border-radius: 5px;
 }
 
 .faqItem {
@@ -89,4 +93,44 @@ body {
     font-size: 30px;
     width: 60%;
 
+    border-radius: 7px;
+}
+
+
+.columnContainer {
+    background: rgb(157, 200, 237);
+    width: 70%;
+    padding: 20px;
+    border: 3px solid rgb(63, 63, 63);
+    margin: auto;
+}
+
+.columns {
+    display: flex;
+    flex-direction: row;
+    column-count: 2;
+}
+
+.addButton {
+    font-size: 3vh;
+    border: 1px solid black;
+    background: #a39fe9;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
+.headerContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.frontlistItem {
+    width: 95%;
+    background: rgb(73, 167, 222);
+    padding: 14px;
+    border: 2px solid rgb(78, 177, 235);
+    border-radius: 5px;
 }
