@@ -51,6 +51,8 @@ body {
     border-radius: 7px;
 
 }
+
+
 .consoleContainer {
     display: flex;
     flex-wrap: wrap;
@@ -76,6 +78,21 @@ body {
     background: rgb(73, 167, 222);
     padding: 10px;
     border: 2px solid rgb(78, 177, 235);
+}
+
+.userCard {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    margin: 10px;
+    border: 4px solid black;
+    height: 500px;
+    position: relative;
+    background: #d7d7d7;
+    font-weight: bolder;
+    font-size: 30px;
+    width: 60%;
+
     border-radius: 7px;
 }
 
