@@ -13,6 +13,9 @@ class RegisterForm(ModelForm):
     class Meta:
         model = models.GFUser
         fields = ['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput()
+        }
 
 
 class Add_FAQ(ModelForm):

@@ -7,10 +7,17 @@
     {% elif page == 'login' %}
     <a href='/register/'><button class='buttonStyle'>Register</button></a>
     {% endif %}
-
 </div>
-
-<form action="" method="post" class='contentContainer'>
-    {% csrf_token %} {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
+<br>
+<br>
+<div>
+    <div class='headerInfo'>
+        {% if page == 'register' %}
+        <p>Register Here:</p>
+        {% elif page == 'login' %}
+        <p>Login Here:</p>
+        {% endif %} </div>
+    <form action="" method="post" class='contentContainer'>
+        {% csrf_token %} {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
