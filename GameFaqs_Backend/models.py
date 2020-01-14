@@ -15,6 +15,9 @@ class GFUser(AbstractUser):
     signature = models.CharField(max_length=200, null=True, blank=True)
     website = models.URLField(max_length=200, null=True, blank=True)
 
+    # def get_absolute_url(self):
+    #     return reverse('userdetail', kwargs={'id': self.id})
+
     def __str__(self):
         return f'{self.username}'
 

@@ -209,7 +209,25 @@ class UserAccountView(TemplateView):
         )
 
 
-class UserAccountEditView(UpdateView):
-    model = GFUser
-    fields = ['username', 'password', 'signature', 'website']
-    template_name = 'gfuser_update_form.html'
+# class UserAccountEditView(UpdateView):
+#     model = GFUser
+#     fields = ['username', 'password', 'signature', 'website']
+#     template_name= 'gfuser_update_form.html'
+
+#     def form_valid(self, form):
+#         print(form.cleaned_data)
+#         return super().form_valid
+
+
+def UserAccountEditView(request, id):
+    html= 'gfuser_update_form.html'
+    newUser = GFUser.objects.get(id=id)
+
+    if request.method == "POST":
+        form = EditUserForm(request.POST, instance=newUser)
+        form.save()
+        return HttpResponseRedirect(reverse('userdetail', kwargs={'id': id}))
+
+    form = EditUserForm(instance=newUser)
+
+    return render(request, html, {'form': form})
