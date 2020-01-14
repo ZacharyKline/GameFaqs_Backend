@@ -25,7 +25,9 @@
     <div>
         <div class='headerContent'>
             <div class='headerInfo'>Faqs:</div>
-            <a href="/addfaq/{{ games.id }}"><button class='addButton'>Add Faq</button></a>
+            {% if request.user.is_authenticated %}
+            <a href="/addfaq/{{ games.id }}"><button class='addButton'>Add FAQ</button></a>
+            {% endif %}
         </div>
         <div class='contentContainer'>
             {% for item in faqs %}
@@ -39,7 +41,10 @@
         <br>
         <div class='headerContent'>
             <div class='headerInfo'>Messages:</div>
+            {% if request.user.is_authenticated %}
+
             <a href="/addmessage/{{ games.id }}"><button class='addButton'>Add Message</button></a>
+            {% endif %}
         </div>
         <div class='contentContainer'>
             {% for item in messages %}
