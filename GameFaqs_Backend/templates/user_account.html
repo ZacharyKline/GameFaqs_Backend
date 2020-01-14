@@ -1,35 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    {% load static %}
-    <link rel='stylesheet' href='/static/styles.css'>
-</head>
-<body>
+{% load static %}
+<link rel='stylesheet' href='../../static/styles.css'>
 <div class='navbarStyle'>
     <a href='/'><button class='buttonStyle'>Home</button></a>
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
     <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
-    <a href='/allfaqs/'><button class='buttonStyle'>Faqs</button></a>
+    <a href='/allfaqs/'><button class='buttonStyle'>FAQs</button></a>
+    {% if request.user.is_authenticated %}
+    <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
+    <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
+    {% else %}
     <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    {% endif %}
+    <div>
+    </div>
 </div>
-    <h1>User Account Page</h1>
-    <span>User Faqs:</span>
-    <a href="/edituser/{{ my_user.id }}/">Edit Button</a>  
-    <div class="userCard">
-    {% for use_faq in user_faqs %}
-        <div class="">{{use_faq.user}}</div>
+<br>
+<br>
+<div class='headerContent'>
+    <p class='headerInfo'>User Account:</p>
+    <a href="/edituser/{{ my_user.id }}/"><button class='addButton'>Edit Profile</button></a>
+</div>
+<div class=' headerInfo'>
+    <p>User Faqs:</p>
+</div>
+<div class='contentContainer'>
+
+    {% for item in user_faqs %}
+    <p class="faqItem">
+        FAQ: <a href=''>{{item.name}}</a>
         <br>
-        <div>{{use_faq.name}}</div>
+        Game: <a href=''>{{item.game}}</a>
         <br>
-        <div>{{use_faq.game}}</div>
-        <br>
-        <div>{{use_faq.body}}</div>
-        
+    </p>
     {% endfor %}
 </div>
-</body>
-</html>
+
+<div class='headerInfo'>
+    <p>User Messages:</p>
+</div>
+<div class='contentContainer'>
+
+    {% for item in user_messages %}
+    <p class="faqItem">
+        Title: <a href=''>{{item.title}}</a>
+        <br>
+        Message: <a href=''>{{item.body}}</a>
+        <br>
+        Game: <a href=''>{{item.game.name}}</a>
+        <br>
+    </p>
+    {% endfor %}
+</div>
+<br>
+<br>

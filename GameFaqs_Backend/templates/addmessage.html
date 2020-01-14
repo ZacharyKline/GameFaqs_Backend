@@ -1,14 +1,24 @@
 {% load static %}
-<link rel='stylesheet' href='../static/styles.css'>
+<link rel='stylesheet' href='../../static/styles.css'>
 <div class='navbarStyle'>
     <a href='/'><button class='buttonStyle'>Home</button></a>
     <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
     <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
     <a href='/allfaqs/'><button class='buttonStyle'>FAQs</button></a>
-    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    {% if request.user.is_authenticated %}
     <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
+    <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
+    {% else %}
+    <a href='/login/'><button class='buttonStyle'>Login</button></a>
+    {% endif %}
     <div>
     </div>
+</div>
+<br>
+<br>
+</div>
+<div class='headerInfo'>
+    <p>Add Message:</p>
 </div>
 <form action="" method="post" class='contentContainer'>
     {% csrf_token %}
