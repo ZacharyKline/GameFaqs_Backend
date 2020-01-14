@@ -207,3 +207,12 @@ class UserAccountEditView(UpdateView):
     fields = ['username', 'password', 'signature', 'website']
     template_name= 'gfuser_update_form.html'
 
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid
+    
+    def get_absolute_url(self):
+        return reverse('userdetail', kwargs={'id': self.id})
+
+   
+
