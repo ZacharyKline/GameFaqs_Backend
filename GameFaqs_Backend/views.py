@@ -6,7 +6,6 @@ from GameFaqs_Backend import models, forms
 from django.views import View
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import TemplateView
-from django.views.generic.edit import UpdateView
 
 
 class ViewMainPage(View):
@@ -220,14 +219,14 @@ class UserAccountView(TemplateView):
 
 
 def UserAccountEditView(request, id):
-    html= 'gfuser_update_form.html'
+    html = 'gfuser_update_form.html'
     newUser = GFUser.objects.get(id=id)
 
     if request.method == "POST":
-        form = EditUserForm(request.POST, instance=newUser)
+        form = forms.EditUserForm(request.POST, instance=newUser)
         form.save()
         return HttpResponseRedirect(reverse('userdetail', kwargs={'id': id}))
 
-    form = EditUserForm(instance=newUser)
+    form = forms.EditUserForm(instance=newUser)
 
     return render(request, html, {'form': form})
