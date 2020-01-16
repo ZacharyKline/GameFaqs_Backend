@@ -35,3 +35,15 @@ class EditUserForm(ModelForm):
     class Meta:
         model = models.GFUser
         fields = ['username', 'password', 'signature', 'website']
+
+
+class QuestionForm(ModelForm):
+    class Meta:
+        model = models.Question 
+        fields = ['game', 'question_title', 'question_body', 'spoiler']
+
+
+class AnswerForm(ModelForm):
+    class Meta:
+        model = models.Answer
+        fields = ['answer_body']

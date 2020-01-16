@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet' href='/static/styles.css/'>
+    <link rel='stylesheet' href='/static/que.css/'>
+</head>
+<body>
+    <div class="highlight3"></div>
+    <div class='navbarStyle'>
+        <img src="../../static/img/GF2.png/">
+        <div class="withinNavContainer">
+            <a href='/'><button class='buttonStyle'>Home</button></a>
+            <a href='/question/'><button class='buttonStyle'>Questions</button></a>
+            <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+            <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+            <a href='/allfaqs/'><button class='buttonStyle'>FAQs</button></a>
+            {% if request.user.is_authenticated %}
+            <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
+            <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
+            {% else %}
+            <a href='/login/'><button class='buttonStyle'>Login</button></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="highlight"></div>
+    <div class="shadow"></div>
+    <div class="highlight2"></div>
+<div>
+    <div class='contentContainer'>
+    <h3>Stuck? Get answers here! Ask You Question Below: </h3>
+    <form action="" method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+    <div class='contentContainer quesionList'>
+        <h3><u>Question List</u></h3>
+        {% for question in question_list %}
+        <div style="display:flex; justify-content:center; align-items: center;flex-direction:column ;border: 1px solid grey; border-radius: 15%; width: 30%; min-height: 15vh">
+            <div><h4>{{ question.user }}</h4></div>
+            <a href="/answer/{{ question.id }}/">{{ question.question_title }}</a>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
+
