@@ -90,3 +90,20 @@ class Message(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.title}'
+
+
+class Question(models.Model):
+    user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    # game = models.ForeignKey(Game ,on_delete=models.CASCADE)
+    question_title = models.CharField(max_length=200)
+    question_body = models.TextField(blank=True,null=True)
+    datetime = models.DateTimeField(default=timezone.now)
+    game = models.ForeignKey("Game", related_name="game_question", null=True, on_delete=models.CASCADE)
+    answered = models.BooleanField(default=False, blank=True,null=True)
+    spoiler = models.BooleanField(default=False, blank=True,null=True)
+
+
+class Answer(models.Model):
+    user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name="question_to_answer", on_delete=models.CASCADE)
+    answer_body = models.TextField()

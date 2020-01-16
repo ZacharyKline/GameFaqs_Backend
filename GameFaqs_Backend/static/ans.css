@@ -1,0 +1,9 @@
+.answerContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+answerItem{
+    display: flex;
+    flex-direction: column;
+}

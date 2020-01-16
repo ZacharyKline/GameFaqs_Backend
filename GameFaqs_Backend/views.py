@@ -224,10 +224,50 @@ def UserAccountEditView(request, id):
     newUser = GFUser.objects.get(id=id)
 
     if request.method == "POST":
-        form = EditUserForm(request.POST, instance=newUser)
+        form = forms.EditUserForm(request.POST, instance=newUser)
         form.save()
         return HttpResponseRedirect(reverse('userdetail', kwargs={'id': id}))
 
-    form = EditUserForm(instance=newUser)
+    form = forms.EditUserForm(instance=newUser)
 
     return render(request, html, {'form': form})
+
+
+
+def QuestionView(request):
+    html = 'question_page.html'
+    all_questions = models.Question.objects.all()
+
+    if request.method == "POST":
+        form = forms.QuestionForm(request.POST)
+        q = form.save(commit=False)
+        q.user = request.user
+        q.save()
+        return HttpResponseRedirect(reverse('questionpage'))
+        
+    form = forms.QuestionForm()
+
+    return render(request, html, {'form': form, 'question_list': all_questions})
+
+
+def AnswerView(request, id):
+    html = 'answers_page.html'
+
+    the_question_to_answer = models.Question.objects.get(id=id)
+
+    list_of_answers = models.Answer.objects.all()
+
+    if request.method == "POST":
+        form = forms.AnswerForm(request.POST)
+        a = form.save(commit=False)
+        a.user = request.user
+        a.question = the_question_to_answer
+        a.save()
+        return HttpResponseRedirect(reverse('answerpage', kwargs={'id': id}))
+
+    form = forms.AnswerForm()
+
+    return render(request, html, {'form': form, 'answer_list': list_of_answers, 'question':the_question_to_answer})
+
+
+

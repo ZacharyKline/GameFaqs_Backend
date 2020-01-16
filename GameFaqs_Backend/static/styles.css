@@ -1,5 +1,9 @@
 
-
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+img{
+    width:5%;
+    margin-left:70px;
+}
 body {
     background: rgb(0, 119, 187);
     background-image: url(./itl.cat_google-pixel-wallpaper_63820.png);
@@ -19,16 +23,48 @@ body {
 
 .navbarStyle {
     background: #7169ff;
-    height: 10%;
+    height: 75px;
     margin-top: 1px;
     margin: 0;
+    width:100%;
+    display:flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    justify-content: space-between;
+   
 }
-
+.withinNavContainer{
+    width: 75%;
+  
+}
+.highlight {
+    background: #9592d3;
+    height: 2px;
+}
+.highlight2 {
+    background: #5c55dd;
+    height: 1px;
+}
+.highlight3 {
+    background: #5c55dd;
+    height: 1px;
+}
+.shadow{
+    height: 3px;
+    width: 100%;
+    background: #1f1a7c;
+}
 .buttonStyle {
-    font-size: 7vh;
+    font-family: "Roboto";
+    font-size: 1.1rem;
     border: 3px solid black;
     background: #a39fe9;
     font-weight: bolder;
+    width:13.5%;
+
+}
+.buttonStyle:hover{
+    background-color: white;
 }
 
 .headerInfo {
@@ -96,7 +132,6 @@ body {
     font-weight: bolder;
     font-size: 30px;
     width: 60%;
-
     border-radius: 7px;
 }
 
@@ -122,6 +157,7 @@ body {
     font-weight: bolder;
     display: flex;
     justify-content: center;
+
 }
 
 .headerContent {
@@ -137,4 +173,10 @@ body {
     padding: 14px;
     border: 2px solid rgb(78, 177, 235);
     border-radius: 5px;
+}
+
+.questionList {
+    display:flex;
+    flex-direction: column;
+    margin: 10px;
 }
