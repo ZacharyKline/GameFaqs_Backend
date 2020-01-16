@@ -73,6 +73,7 @@ body {
     font-weight: bolder;
     font-size: 8vh;
     color: rgb(130, 130, 130);
+    text-shadow: 1px 1px #a5a5a5;
 
 }
 
@@ -81,7 +82,7 @@ body {
     align-items: center;
     justify-content: center;
     margin: 10px;
-    width: 20%;
+    width: 21%;
     height: 20vh;
     position: relative;
     background: rgb(73, 167, 222);
@@ -118,6 +119,7 @@ body {
     background: rgb(73, 167, 222);
     padding: 10px;
     border: 2px solid rgb(78, 177, 235);
+    border-radius: 5px;
 }
 
 .userCard {

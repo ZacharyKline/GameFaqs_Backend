@@ -45,11 +45,11 @@
     <div class='contentContainer'>
         {% for item in messages %}
         <p class='frontlistItem'>
-            <a href=''>{{ item.title }}</a>
+            <a href='/message/{{ item.id }}/'>{{ item.title }}</a>
             <br>
-            Game: <a href=''>{{item.game.name}}</a>
+            Game: <a href='/game/{{item.game.id}}/'>{{item.game.name}}</a>
             <br>
-            written by: <a href = "/useraccount/{{ item.user.id }}">{{item.user}}</a>
+            written by: <a href="/useraccount/{{ item.user.id }}">{{item.user}}</a>
         </p>
         {% endfor %}
     </div>
