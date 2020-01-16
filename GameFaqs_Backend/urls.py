@@ -42,7 +42,7 @@ urlpatterns = [
     path('addfaq/<int:id>/', views.AddFaqView.as_view()),
     path('addmessage/<int:id>/', views.AddMessageView.as_view()),
     path('edituser/<int:id>/', views.UserAccountEditView, name='edituser'),
-    path('question', views.QuestionView, name='questionpage'),
+    path('question/', views.QuestionView, name='questionpage'),
     path('answer/<int:id>/', views.AnswerView, name='answerpage')
 ]
 
