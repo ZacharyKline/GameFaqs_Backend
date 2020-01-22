@@ -75,7 +75,7 @@ class ViewAllFaqs(View):
     def get(self, request):
         logged_in_user_id = request.user.id
         html = 'allfaqs.html'
-        faqs = models.Faq.objects.all()
+        faqs = models.Faq.objects.all().order_by('-post_time')
         return render(request, html, {
             'faqs': faqs,
             'logged_in_user_id': logged_in_user_id
@@ -232,7 +232,6 @@ def UserAccountEditView(request, id):
     return render(request, html, {'form': form})
 
 
-
 def QuestionView(request):
     html = 'question_page.html'
     all_questions = models.Question.objects.all()
@@ -243,10 +242,11 @@ def QuestionView(request):
         q.user = request.user
         q.save()
         return HttpResponseRedirect(reverse('questionpage'))
-        
+
     form = forms.QuestionForm()
 
-    return render(request, html, {'form': form, 'question_list': all_questions})
+    return render(request, html, {
+        'form': form, 'question_list': all_questions})
 
 
 def AnswerView(request, id):
@@ -266,7 +266,7 @@ def AnswerView(request, id):
 
     form = forms.AnswerForm()
 
-    return render(request, html, {'form': form, 'answer_list': list_of_answers, 'question':the_question_to_answer})
-
-
-
+    return render(request, html, {
+        'form': form,
+        'answer_list': list_of_answers,
+        'question': the_question_to_answer})

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,27 @@
     <link rel='stylesheet' href='/static/styles.css'>
     <link rel='stylesheet' href='/static/ans.css'>
 </head>
+
 <body>
     <div class="highlight3"></div>
     <div class='navbarStyle'>
         <img src="../../static/img/GF2.png/">
         <div class="withinNavContainer">
-        <a href='/'><button class='buttonStyle'>Home</button></a>
-        <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
-        <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
-        <a href='/allfaqs/'><button class='buttonStyle'>FAQs</button></a>
-        {% if request.user.is_authenticated %}
-        <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>User Account</button></a>
-        <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
-        {% else %}
-        <a href='/login/'><button class='buttonStyle'>Login</button></a>
-        {% endif %}
+            <a href='/'><button class='buttonStyle'>Home</button></a>
+            <a href='/allgames/'><button class='buttonStyle'>Games</button></a>
+            <a href='/allconsoles/'><button class='buttonStyle'>Consoles</button></a>
+            <a href='/allfaqs/'><button class='buttonStyle'>FAQs</button></a>
+            {% if request.user.is_authenticated %}
+            <a href='/useraccount/{{ request.user.id }}/'><button class='buttonStyle'>My Account</button></a>
+            <a href="/logout/"><button class='buttonStyle'>Logout</button></a>
+            {% else %}
+            <a href='/login/'><button class='buttonStyle'>Login</button></a>
+            {% endif %}
+        </div>
     </div>
-</div>
-<div class="highlight"></div>
-<div class="shadow"></div>
-<div class="highlight2"></div>
+    <div class="highlight"></div>
+    <div class="shadow"></div>
+    <div class="highlight2"></div>
     <br>
     <div class='contentContainer'>
         <!-- question -->
@@ -38,7 +40,7 @@
             <p>Asked by: {{ question.user }}</p>
         </div>
     </div>
-    
+
     <!-- Answer Section -->
     <!-- Anwser Box -->
     <div class='contentContainer'>
@@ -49,27 +51,28 @@
             {% endfor %}
         </div> -->
 
-    <form action="" method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <input type="submit" value="Submit" />
-    </form>
-<br>
-<br>
-    <div class="answerContainer">
-        <h3><u>Latest Answers: </u></h3>
-        <ol>
-        {% for answer in answer_list%}
-        <li class="answerItem">
-            <p>{{answer.answer_body}}</p>
-            <p>Anser By: {{answer.user}}</p>
-        </li>
-        <hr>
-        {% endfor %}
-    </ol>
-    </div>
+        <form action="" method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+        <br>
+        <br>
+        <div class="answerContainer">
+            <h3><u>Latest Answers: </u></h3>
+            <ol>
+                {% for answer in answer_list%}
+                <li class="answerItem">
+                    <p>{{answer.answer_body}}</p>
+                    <p>Answer By: {{answer.user}}</p>
+                </li>
+                <hr>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
 
 
 
 </body>
+
 </html>

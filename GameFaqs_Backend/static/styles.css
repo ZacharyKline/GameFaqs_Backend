@@ -1,4 +1,3 @@
-
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
 img{
     width:5%;
@@ -11,7 +10,6 @@ body {
     margin: 0px;
     padding: 0px;
 }
-
 .contentContainer {
     background: rgb(157, 200, 237);
     width: 70%;
@@ -20,7 +18,6 @@ body {
     margin: auto;
     border-radius: 20px;
 }
-
 .navbarStyle {
     background: #7169ff;
     height: 75px;
@@ -31,11 +28,9 @@ body {
     align-items: flex-end;
     justify-content: flex-end;
     justify-content: space-between;
-   
 }
 .withinNavContainer{
     width: 75%;
-  
 }
 .highlight {
     background: #9592d3;
@@ -61,12 +56,10 @@ body {
     background: #a39fe9;
     font-weight: bolder;
     width:13.5%;
-
 }
 .buttonStyle:hover{
     background-color: white;
 }
-
 .headerInfo {
     display: flex;
     justify-content: space-around;
@@ -74,9 +67,7 @@ body {
     font-size: 8vh;
     color: rgb(130, 130, 130);
     text-shadow: 1px 1px #a5a5a5;
-
 }
-
 .consoleCard {
     display: flex;
     align-items: center;
@@ -90,10 +81,7 @@ body {
     font-size: 30px;
     border: 3px solid rgb(78, 177, 235);
     border-radius: 7px;
-
 }
-
-
 .consoleContainer {
     display: flex;
     flex-wrap: wrap;
@@ -103,9 +91,7 @@ body {
     padding: 20px;
     border: 3px solid rgb(63, 63, 63);
     border-radius: 12px;
-
 }
-
 .listItem {
     width: 95%;
     background: rgb(73, 167, 222);
@@ -113,7 +99,6 @@ body {
     border: 2px solid rgb(78, 177, 235);
     border-radius: 5px;
 }
-
 .faqItem {
     width: 95%;
     background: rgb(73, 167, 222);
@@ -121,7 +106,6 @@ body {
     border: 2px solid rgb(78, 177, 235);
     border-radius: 5px;
 }
-
 .userCard {
     display: flex;
     align-items: left;
@@ -136,8 +120,6 @@ body {
     width: 60%;
     border-radius: 7px;
 }
-
-
 .columnContainer {
     background: rgb(157, 200, 237);
     width: 70%;
@@ -145,13 +127,11 @@ body {
     border: 3px solid rgb(63, 63, 63);
     margin: auto;
 }
-
 .columns {
     display: flex;
     flex-direction: row;
     column-count: 2;
 }
-
 .addButton {
     font-size: 3vh;
     border: 1px solid black;
@@ -159,16 +139,13 @@ body {
     font-weight: bolder;
     display: flex;
     justify-content: center;
-
 }
-
 .headerContent {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .frontlistItem {
     width: 95%;
     background: rgb(73, 167, 222);
@@ -176,7 +153,6 @@ body {
     border: 2px solid rgb(78, 177, 235);
     border-radius: 5px;
 }
-
 .questionList {
     display:flex;
     flex-direction: column;
